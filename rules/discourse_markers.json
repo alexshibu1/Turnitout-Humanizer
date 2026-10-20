@@ -1,0 +1,22 @@
+{
+  "However": ["Nevertheless", "Nonetheless", "That said", "Be that as it may", "Yet"],
+  "Therefore": ["Consequently", "Hence", "As a result", "Accordingly", "It follows that"],
+  "Moreover": ["Furthermore", "In addition", "Additionally", "What is more", "Beyond this"],
+  "Although": ["Even though", "Despite the fact that", "While", "Notwithstanding that", "Granted that"],
+  "Thus": ["Hence", "Accordingly", "As such", "In this manner", "Consequently"],
+  "Indeed": ["In fact", "Certainly", "As a matter of fact", "To be sure", "Without question"],
+  "Similarly": ["Likewise", "In a similar manner", "Comparably", "By the same token", "Along these lines"],
+  "Specifically": ["In particular", "More precisely", "To be specific", "Namely", "That is"],
+  "Notably": ["Remarkably", "Significantly", "Importantly", "Strikingly", "Of particular note"],
+  "Meanwhile": ["In the interim", "Concurrently", "At the same time", "Simultaneously", "During this period"],
+  "Conversely": ["On the contrary", "In contrast", "By contrast", "On the other hand", "Alternatively"],
+  "Ultimately": ["In the final analysis", "When all is considered", "At the end of the day", "In sum"],
+  "Evidently": ["Apparently", "It appears that", "Seemingly", "Ostensibly", "By all accounts"],
+  "Essentially": ["Fundamentally", "At its core", "In essence", "Basically", "At the heart of it"],
+  "Typically": ["Generally", "Ordinarily", "As a rule", "In most cases", "Under normal circumstances"],
+  "Furthermore": ["Moreover", "In addition", "What is more", "Additionally", "Besides"],
+  "Consequently": ["As a result", "Therefore", "Hence", "Accordingly", "It follows that"],
+  "Additionally": ["Moreover", "Furthermore", "In addition", "Also", "Beyond that"],
+  "Nevertheless": ["Nonetheless", "However", "Even so", "Still", "All the same"],
+  "Accordingly": ["Consequently", "Therefore", "As a result", "Hence", "In response"]
+}

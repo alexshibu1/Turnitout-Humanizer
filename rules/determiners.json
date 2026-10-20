@@ -1,0 +1,18 @@
+{
+  "this": ["the present", "the current", "the aforementioned"],
+  "these": ["the present", "such", "the aforementioned"],
+  "that": ["the given", "said", "the referenced"],
+  "those": ["the specified", "such", "the aforementioned"],
+  "several": ["a number of", "multiple", "various"],
+  "many": ["numerous", "a considerable number of", "myriad"],
+  "some": ["certain", "particular", "select"],
+  "few": ["a limited number of", "a small number of", "sparse"],
+  "most": ["the majority of", "the bulk of", "nearly all"],
+  "all": ["every", "the entirety of", "the totality of"],
+  "each": ["every", "any given", "every individual"],
+  "every": ["each", "all", "any given"],
+  "both": ["the two", "each of the two", "the pair of"],
+  "another": ["an additional", "a further", "one more"],
+  "such": ["said", "the given", "the specified"],
+  "other": ["alternative", "additional", "further"]
+}
