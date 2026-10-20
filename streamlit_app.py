@@ -1,4 +1,5 @@
 import streamlit as st
+import re
 import io
 import zipfile
 from engine.transformer import TextTransformer
@@ -7,46 +8,127 @@ from engine.unicode_purge import purge_zero_width
 from engine.docx_processor import read_docx, write_docx
 
 st.set_page_config(
-    page_title="Turnitout — AI Text Humanizer",
-    page_icon="🛡️",
+    page_title="Turnitout — Alex's Text Humanizer",
+    page_icon="🌸",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 st.markdown("""
 <style>
-    .stApp { max-width: 1200px; margin: 0 auto; }
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
+    .stApp {
+        max-width: 1200px;
+        margin: 0 auto;
+        font-family: 'Quicksand', sans-serif;
+    }
+
+    /* Pastel Kawaii Theme */
     .stat-box {
-        background: linear-gradient(135deg, #1a1a2e, #16213e);
-        border: 1px solid #e63946;
-        border-radius: 10px;
-        padding: 16px;
+        background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+        border: 2px solid #f8bbd0;
+        border-radius: 18px;
+        padding: 18px;
         text-align: center;
         margin: 4px;
+        box-shadow: 0 4px 14px rgba(244, 143, 177, 0.15);
     }
-    .stat-box h3 { color: #e63946; margin: 0; font-size: 1.8em; }
-    .stat-box p { color: #aaa; margin: 4px 0 0 0; font-size: 0.85em; }
-    .score-good { color: #2ecc71 !important; }
-    .score-mid { color: #f39c12 !important; }
-    .score-bad { color: #e63946 !important; }
+    .stat-box h3 { color: #ad1457; margin: 0; font-size: 1.8em; font-weight: 700; }
+    .stat-box p { color: #7b1fa2; margin: 4px 0 0 0; font-size: 0.85em; font-weight: 500; }
+    .score-good { color: #66bb6a !important; }
+    .score-mid { color: #ffa726 !important; }
+    .score-bad { color: #ef5350 !important; }
+
+    .sentence-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        margin: 4px 0;
+        border-radius: 12px;
+        font-size: 0.92em;
+        line-height: 1.5;
+    }
+    .sentence-row:nth-child(odd) { background: #fce4ec44; }
+    .sentence-row:nth-child(even) { background: #e1bee744; }
+    .score-pill {
+        flex-shrink: 0;
+        min-width: 56px;
+        text-align: center;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 0.82em;
+    }
+    .pill-good { background: #c8e6c9; color: #2e7d32; }
+    .pill-mid { background: #fff3e0; color: #e65100; }
+    .pill-bad { background: #ffcdd2; color: #c62828; }
+    .sentence-text { flex: 1; }
+
+    .brand-footer {
+        text-align: center;
+        padding: 24px 0 12px 0;
+        color: #ce93d8;
+        font-size: 0.8em;
+        font-weight: 500;
+    }
+    .brand-footer a { color: #f48fb1; text-decoration: none; }
+
+    /* Override Streamlit defaults for kawaii vibe */
+    .stRadio > label { font-weight: 600; }
+    h1, h2, h3 { font-family: 'Quicksand', sans-serif !important; }
 </style>
 """, unsafe_allow_html=True)
 
 
+def split_sentences(text):
+    return [s.strip() for s in re.split(r'(?<=[.!?])\s+', text) if s.strip()]
+
+
+def score_sentence(sentence):
+    if len(sentence) < 20:
+        return {"combined_score": 50.0, "verdict": "Too short"}
+    return compute_perplexity_score(sentence)
+
+
+def render_sentence_scores(sentences, label=""):
+    if label:
+        st.caption(label)
+    html_parts = []
+    for s in sentences:
+        sc = score_sentence(s)
+        score = sc["combined_score"]
+        if score > 55:
+            pill_class = "pill-good"
+        elif score > 30:
+            pill_class = "pill-mid"
+        else:
+            pill_class = "pill-bad"
+        escaped = s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        html_parts.append(
+            f'<div class="sentence-row">'
+            f'<span class="score-pill {pill_class}">{score:.0f}</span>'
+            f'<span class="sentence-text">{escaped}</span>'
+            f'</div>'
+        )
+    st.markdown("".join(html_parts), unsafe_allow_html=True)
+
+
 def render_sidebar():
     with st.sidebar:
-        st.title("Turnitout Engine")
-        st.caption("100% Rule-Based — Zero AI APIs — Zero Cost")
+        st.markdown("## 🌸 Turnitout")
+        st.caption("Alex's personal humanizer")
         st.divider()
 
         mode = st.radio(
             "Mode",
-            ["Text Humanizer", "Document (.docx)", "Perplexity Checker"],
+            ["Text Humanizer", "Document (.docx)", "Sentence Scanner"],
             index=0,
         )
 
         st.divider()
-        st.subheader("Engine Controls")
+        st.markdown("##### Engine Controls")
 
         aggressiveness = st.slider(
             "Rewrite Intensity",
@@ -72,7 +154,10 @@ def render_sidebar():
         )
 
         st.divider()
-        st.caption("Built for personal use. No data stored.")
+        st.markdown(
+            '<div class="brand-footer">built by <strong>Alex Shibu</strong></div>',
+            unsafe_allow_html=True,
+        )
 
     return mode, aggressiveness, purge_unicode, seed
 
@@ -97,7 +182,7 @@ def render_stats(stats, before_score, after_score):
         )
         st.markdown(
             f'<div class="stat-box"><h3 class="{score_class}">{after_score:.0f}</h3>'
-            f"<p>Perplexity Score (after)</p></div>",
+            f"<p>Perplexity (after)</p></div>",
             unsafe_allow_html=True,
         )
     with cols[3]:
@@ -130,15 +215,15 @@ def run_transform(text, aggressiveness, purge_unicode, seed):
 
 
 def text_humanizer_page(aggressiveness, purge_unicode, seed):
-    st.header("Text Humanizer")
+    st.markdown("### 🌷 Text Humanizer")
     st.caption(
-        "Paste text below. The engine rewrites it using deterministic rules — "
+        "Paste text below. The engine rewrites using deterministic rules — "
         "synonym swaps, phrase rewrites, discourse rotation, and n-gram disruption."
     )
 
     input_text = st.text_area(
         "Input Text",
-        height=250,
+        height=220,
         placeholder="Paste your text here...",
     )
 
@@ -157,11 +242,16 @@ def text_humanizer_page(aggressiveness, purge_unicode, seed):
 
         col_left, col_right = st.columns(2)
         with col_left:
-            st.subheader("Original")
-            st.text_area("original_display", input_text, height=300, disabled=True, label_visibility="collapsed")
+            st.markdown("##### Original")
+            st.text_area("original_display", input_text, height=250, disabled=True, label_visibility="collapsed")
         with col_right:
-            st.subheader("Humanized")
-            st.text_area("result_display", result, height=300, label_visibility="collapsed")
+            st.markdown("##### Humanized")
+            st.text_area("result_display", result, height=250, label_visibility="collapsed")
+
+        st.divider()
+        st.markdown("##### Per-Sentence AI Score (Humanized)")
+        sentences = split_sentences(result)
+        render_sentence_scores(sentences)
 
         with st.expander("Transformation Breakdown"):
             for key, val in stats.items():
@@ -170,7 +260,7 @@ def text_humanizer_page(aggressiveness, purge_unicode, seed):
 
 
 def docx_page(aggressiveness, purge_unicode, seed):
-    st.header("Document Processor (.docx)")
+    st.markdown("### 📄 Document Processor (.docx)")
     st.caption("Upload a Word document. Formatting is preserved — only text content is transformed.")
 
     uploaded = st.file_uploader("Upload .docx", type=["docx"], accept_multiple_files=False)
@@ -217,6 +307,13 @@ def docx_page(aggressiveness, purge_unicode, seed):
             use_container_width=True,
         )
 
+        st.divider()
+        st.markdown("##### Per-Sentence AI Score (Humanized)")
+        all_sentences = []
+        for t in full_after:
+            all_sentences.extend(split_sentences(t))
+        render_sentence_scores(all_sentences[:30])
+
         with st.expander("Preview Changes (first 10 paragraphs)"):
             for i, (orig, new) in enumerate(zip(full_before[:10], full_after[:10])):
                 if orig != new:
@@ -226,45 +323,50 @@ def docx_page(aggressiveness, purge_unicode, seed):
                     st.divider()
 
 
-def checker_page():
-    st.header("Perplexity Checker")
+def scanner_page():
+    st.markdown("### 🔍 Sentence Scanner")
     st.caption(
-        "Check how 'human' your text reads using compression-based entropy analysis. "
-        "No AI API calls — uses zlib/lzma compression ratios as a proxy for text predictability."
+        "Paste any text and see a per-sentence AI score breakdown. "
+        "Each sentence gets its own compression-based perplexity score."
     )
 
     input_text = st.text_area(
-        "Text to Analyze",
-        height=250,
-        placeholder="Paste text to check its perplexity score...",
+        "Text to Scan",
+        height=220,
+        placeholder="Paste text to scan each sentence...",
     )
 
-    if st.button("Analyze", type="primary", use_container_width=True):
+    if st.button("Scan Sentences", type="primary", use_container_width=True):
         if not input_text.strip():
             st.warning("Paste some text first.")
             return
 
-        scores = compute_perplexity_score(input_text)
+        overall = compute_perplexity_score(input_text)
 
         col1, col2, col3 = st.columns(3)
         with col1:
-            st.metric("Combined Score", f"{scores['combined_score']:.1f}/100")
+            st.metric("Overall Score", f"{overall['combined_score']:.1f}/100")
         with col2:
-            st.metric("zlib Ratio", f"{scores['zlib_ratio']:.3f}")
+            st.metric("zlib Ratio", f"{overall['zlib_ratio']:.3f}")
         with col3:
-            st.metric("lzma Ratio", f"{scores['lzma_ratio']:.3f}")
+            st.metric("lzma Ratio", f"{overall['lzma_ratio']:.3f}")
 
-        verdict = scores["verdict"]
+        verdict = overall["verdict"]
         if verdict == "Likely Human":
-            st.success(f"Verdict: {verdict}")
+            st.success(f"Overall: {verdict}")
         elif verdict == "Likely AI":
-            st.error(f"Verdict: {verdict}")
+            st.error(f"Overall: {verdict}")
         else:
-            st.warning(f"Verdict: {verdict}")
+            st.warning(f"Overall: {verdict}")
+
+        st.divider()
+        st.markdown("##### Sentence-by-Sentence Breakdown")
+        sentences = split_sentences(input_text)
+        render_sentence_scores(sentences)
 
         st.caption(
-            "This is a heuristic based on compression entropy, not a definitive detector. "
-            "Higher scores indicate more varied/unpredictable text patterns."
+            "Scores are heuristic (compression entropy). "
+            "Higher = more varied text patterns. Lower = more predictable/AI-like."
         )
 
 
@@ -275,8 +377,15 @@ def main():
         text_humanizer_page(aggressiveness, purge_unicode, seed)
     elif mode == "Document (.docx)":
         docx_page(aggressiveness, purge_unicode, seed)
-    elif mode == "Perplexity Checker":
-        checker_page()
+    elif mode == "Sentence Scanner":
+        scanner_page()
+
+    st.markdown(
+        '<div class="brand-footer">'
+        '🌸 <strong>Turnitout</strong> by Alex Shibu — rule-based, zero AI, zero cost'
+        '</div>',
+        unsafe_allow_html=True,
+    )
 
 
 if __name__ == "__main__":

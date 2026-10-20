@@ -18,5 +18,17 @@
   "Consequently": ["As a result", "Therefore", "Hence", "Accordingly", "It follows that"],
   "Additionally": ["Moreover", "Furthermore", "In addition", "Also", "Beyond that"],
   "Nevertheless": ["Nonetheless", "However", "Even so", "Still", "All the same"],
-  "Accordingly": ["Consequently", "Therefore", "As a result", "Hence", "In response"]
+  "Accordingly": ["Consequently", "Therefore", "As a result", "Hence", "In response"],
+  "In particular": ["Specifically", "Especially", "Most notably", "Above all", "Chiefly"],
+  "As a consequence": ["Consequently", "As a result", "Therefore", "Hence", "Accordingly"],
+  "For instance": ["For example", "To illustrate", "As an example", "By way of illustration", "Consider"],
+  "For example": ["For instance", "To illustrate", "As an example", "Such as", "Consider"],
+  "In other words": ["Put differently", "That is to say", "To rephrase", "Stated differently", "Simply put"],
+  "That is to say": ["In other words", "Put differently", "Namely", "More precisely", "To clarify"],
+  "On balance": ["All things considered", "Overall", "Taking everything into account", "Weighing the evidence"],
+  "In summary": ["To summarize", "In brief", "To recapitulate", "In short", "Summing up"],
+  "To illustrate": ["For example", "For instance", "As an illustration", "Consider", "To demonstrate"],
+  "By extension": ["Correspondingly", "Similarly", "By analogy", "Along the same lines", "In a related vein"],
+  "Admittedly": ["Granted", "To be fair", "It must be conceded that", "It is true that", "One must acknowledge"],
+  "Importantly": ["Crucially", "Significantly", "Notably", "Of particular importance", "Critically"]
 }
