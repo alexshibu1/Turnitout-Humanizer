@@ -27,25 +27,105 @@ st.markdown("""
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Main content block — frosted so text is readable over Bliss */
+[data-testid="stMainBlockContainer"] {
+    background: rgba(192, 192, 192, 0.88) !important;
+    backdrop-filter: blur(2px);
+    border: 2px solid;
+    border-color: #dfdfdf #808080 #808080 #dfdfdf;
+    padding: 16px !important;
+    margin-top: 8px;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+}
+
 .stApp {
-    background-color: #c0c0c0 !important;
+    background: linear-gradient(
+        180deg,
+        #4a90d9 0%,
+        #87ceeb 15%,
+        #b0e0f0 25%,
+        #c8e8f0 30%,
+        #d0f0d0 35%,
+        #5cb85c 42%,
+        #4cae4c 50%,
+        #3d9140 55%,
+        #5cb85c 60%,
+        #6ec96e 65%,
+        #4cae4c 70%,
+        #3d8b3d 80%,
+        #2d6e2d 100%
+    ) !important;
+    background-attachment: fixed !important;
+    min-height: 100vh;
 }
 
 /* ---- SIDEBAR ---- */
 [data-testid="stSidebar"] {
     background-color: #c0c0c0 !important;
-    border-right: 2px solid #808080 !important;
+    border-right: 2px solid;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
 }
 [data-testid="stSidebar"] .stMarkdown h2,
 [data-testid="stSidebar"] .stMarkdown h3,
 [data-testid="stSidebar"] .stMarkdown h5 {
-    font-family: "Arial Black", Impact, sans-serif !important;
+    font-family: "Segoe UI", Tahoma, sans-serif !important;
     color: #000080 !important;
     text-transform: uppercase;
+    font-weight: 800 !important;
 }
 [data-testid="stSidebar"] .stMarkdown p,
 [data-testid="stSidebar"] .stMarkdown span {
     color: #000 !important;
+}
+
+/* Sidebar feature box */
+.sidebar-feature-box {
+    background: #ffff00;
+    border: 2px solid;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf;
+    padding: 10px 12px;
+    margin: 10px 0;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-size: 13px;
+    color: #000;
+}
+.sidebar-feature-box b {
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-weight: 800;
+    color: #000;
+    font-size: 13px;
+}
+.sidebar-feature-box ul {
+    margin: 6px 0 0 0;
+    padding-left: 18px;
+}
+.sidebar-feature-box li {
+    margin-bottom: 3px;
+    font-size: 12px;
+}
+
+/* Sidebar info panel */
+.sidebar-info {
+    background: #fff;
+    border: 2px solid;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    padding: 10px 12px;
+    margin: 10px 0;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-size: 12px;
+    color: #000;
+    text-align: center;
+}
+.sidebar-info .operator-name {
+    font-weight: 800;
+    font-size: 14px;
+    color: #000080;
+    letter-spacing: 0.5px;
+}
+.sidebar-info .tagline {
+    font-size: 11px;
+    color: #808080;
+    margin-top: 4px;
 }
 
 /* ---- BUTTONS — beveled outset ---- */
@@ -141,6 +221,7 @@ st.markdown("""
     display: flex;
     align-items: center;
     justify-content: space-between;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
 }
 .win95-titlebar .win-buttons {
     display: flex;
@@ -194,32 +275,35 @@ st.markdown("""
 .retro-marquee {
     background: #c0c0c0;
     border: 2px solid;
-    border-color: #808080 #fff #fff #808080;
-    box-shadow: inset 1px 1px 0 #404040;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf;
+    box-shadow: 1px 1px 0 #000;
     overflow: hidden;
-    padding: 5px 0;
+    padding: 8px 0;
     margin-bottom: 16px;
 }
 .retro-marquee-inner {
     display: inline-block;
     white-space: nowrap;
-    animation: scroll-left 35s linear infinite, marquee-rainbow 6s linear infinite;
+    animation: scroll-left 40s linear infinite, marquee-rainbow 3s linear infinite;
     font-family: "VT323", "Courier New", monospace;
-    font-size: 15px;
-    letter-spacing: 1px;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.15);
     background: linear-gradient(
         90deg,
-        #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff00ff,
-        #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff00ff
+        #ff0000, #ff4400, #ff8800, #ffcc00, #ffff00, #88ff00, #00ff00,
+        #00ff88, #00ffff, #0088ff, #0044ff, #4400ff, #8800ff, #ff00ff, #ff0088,
+        #ff0000, #ff4400, #ff8800, #ffcc00, #ffff00, #88ff00, #00ff00
     );
-    background-size: 200% 100%;
+    background-size: 300% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 @keyframes marquee-rainbow {
     0% { background-position: 0% 50%; }
-    100% { background-position: 200% 50%; }
+    100% { background-position: 300% 50%; }
 }
 @keyframes scroll-left {
     0% { transform: translateX(100vw); }
@@ -558,7 +642,7 @@ for key, default in [
 # ============================================================
 with st.sidebar:
     st.markdown("""
-    <div class="win95-titlebar" style="margin-bottom:12px;">
+    <div class="win95-titlebar" style="margin-bottom:0;">
         <span>TURNITOUT.EXE</span>
         <div class="win-buttons">
             <span class="win-btn">_</span>
@@ -566,13 +650,31 @@ with st.sidebar:
             <span class="win-btn">X</span>
         </div>
     </div>
+    <div class="sidebar-info" style="margin-top:0;border-top:none;">
+        <div class="operator-name">ALEX SHIBU</div>
+        <div class="tagline">Physics + CS // UofToronto</div>
+        <div class="tagline">God Bless the Hustle 🚢</div>
+    </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("##### CONTROLS")
+    st.markdown("""
+    <div class="sidebar-feature-box">
+        <b>What This Does:</b>
+        <ul>
+            <li>Rewrites AI text to sound human</li>
+            <li>1012+ synonym/phrase rules</li>
+            <li>11-stage transformation pipeline</li>
+            <li>Per-sentence AI detection scoring</li>
+            <li>Zero APIs. Zero cost. Zero data stored.</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
-    mode = st.radio("MODE", ["Humanizer", "Scanner", "Document"], index=0)
+    st.markdown("##### MODE")
+    mode = st.radio("Select mode", ["Humanizer", "Scanner", "Document"], index=0, label_visibility="collapsed")
 
     st.markdown('<div class="groove-hr"></div>', unsafe_allow_html=True)
+    st.markdown("##### SETTINGS")
 
     aggressiveness = st.slider("REWRITE INTENSITY", 0.1, 1.0, 0.55, 0.05)
 
@@ -580,15 +682,18 @@ with st.sidebar:
 
     seed = st.number_input("SEED (0=RANDOM)", 0, 999999, 0)
 
-    st.markdown('<div class="groove-hr"></div>', unsafe_allow_html=True)
-    st.markdown(
-        '<div style="text-align:center;font-family:Courier New,monospace;'
-        'font-size:11px;color:#808080;">'
-        'OPERATOR: <b style="color:#000080;">ALEX SHIBU</b><br>'
-        'ENGINE v2.0 // ZERO AI APIS'
-        '</div>',
-        unsafe_allow_html=True,
-    )
+    st.markdown("""
+    <div class="sidebar-feature-box" style="background:#fff;margin-top:16px;">
+        <b>Bypasses:</b>
+        <ul>
+            <li>Turnitin</li>
+            <li>GPTZero</li>
+            <li>Copyleaks</li>
+            <li>ZeroGPT</li>
+            <li>Originality.ai</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
 
 # ============================================================
