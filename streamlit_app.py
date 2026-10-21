@@ -29,20 +29,12 @@ st.markdown("""
 
 .stApp {
     background-color: #c0c0c0 !important;
-    background-image:
-        linear-gradient(45deg, #b8b8b8 25%, transparent 25%),
-        linear-gradient(-45deg, #b8b8b8 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, #b8b8b8 75%),
-        linear-gradient(-45deg, transparent 75%, #b8b8b8 75%);
-    background-size: 4px 4px;
-    background-position: 0 0, 0 2px, 2px -2px, -2px 0px;
 }
 
 /* ---- SIDEBAR ---- */
 [data-testid="stSidebar"] {
     background-color: #c0c0c0 !important;
-    border-right: 3px solid !important;
-    border-color: #fff #808080 #808080 #fff !important;
+    border-right: 2px solid #808080 !important;
 }
 [data-testid="stSidebar"] .stMarkdown h2,
 [data-testid="stSidebar"] .stMarkdown h3,
@@ -61,8 +53,8 @@ st.markdown("""
     background-color: #c0c0c0 !important;
     color: #000 !important;
     border: 2px solid !important;
-    border-color: #fff #808080 #808080 #fff !important;
-    box-shadow: inset -1px -1px 0 #404040, inset 1px 1px 0 #dfdfdf !important;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
+    box-shadow: 1px 1px 0 #000 !important;
     font-weight: bold !important;
     text-transform: uppercase !important;
     letter-spacing: 0.5px;
@@ -72,28 +64,29 @@ st.markdown("""
 .stButton > button:hover {
     background-color: #d4d4d4 !important;
     color: #000 !important;
-    border-color: #fff #808080 #808080 #fff !important;
 }
 .stButton > button:active {
-    border-color: #808080 #fff #fff #808080 !important;
-    box-shadow: inset 1px 1px 0 #404040, inset -1px -1px 0 #dfdfdf !important;
+    border-color: #404040 #dfdfdf #dfdfdf #404040 !important;
+    box-shadow: none !important;
     transform: translate(1px, 1px);
 }
-/* Primary buttons (green accent) */
+/* Primary buttons */
 .stButton > button[kind="primary"] {
-    background-color: #00aa00 !important;
-    color: #fff !important;
-    border-color: #00ff00 #006600 #006600 #00ff00 !important;
-    box-shadow: inset -1px -1px 0 #004400, inset 1px 1px 0 #44ff44 !important;
-    font-size: 16px !important;
+    background-color: #c0c0c0 !important;
+    color: #000 !important;
+    border: 2px solid !important;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
+    box-shadow: 1px 1px 0 #000 !important;
+    font-size: 15px !important;
 }
 .stButton > button[kind="primary"]:hover {
-    background-color: #00cc00 !important;
-    color: #fff !important;
+    background-color: #d4d4d4 !important;
+    color: #000 !important;
 }
 .stButton > button[kind="primary"]:active {
-    border-color: #006600 #00ff00 #00ff00 #006600 !important;
-    box-shadow: inset 1px 1px 0 #004400, inset -1px -1px 0 #44ff44 !important;
+    border-color: #404040 #dfdfdf #dfdfdf #404040 !important;
+    box-shadow: none !important;
+    transform: translate(1px, 1px);
 }
 
 /* ---- TEXT AREAS — inset sunken ---- */
@@ -101,9 +94,9 @@ st.markdown("""
     background-color: #fff !important;
     color: #000 !important;
     border: 2px solid !important;
-    border-color: #808080 #fff #fff #808080 !important;
-    box-shadow: inset 1px 1px 0 #404040, inset -1px -1px 0 #dfdfdf !important;
-    font-family: "Courier New", Courier, monospace !important;
+    border-color: #808080 #dfdfdf #dfdfdf #808080 !important;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.15) !important;
+    font-family: "Segoe UI", Tahoma, sans-serif !important;
     font-size: 14px !important;
     line-height: 1.6 !important;
 }
@@ -138,14 +131,13 @@ st.markdown("""
 .win95-titlebar {
     background: linear-gradient(to right, #000080, #1084d0);
     color: #fff;
-    font-family: "Arial Black", Impact, sans-serif;
-    font-weight: 900;
-    font-size: 14px;
-    padding: 4px 8px;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    padding: 5px 10px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    border: 2px solid;
-    border-color: #5555ff #000044 #000044 #5555ff;
+    letter-spacing: 0.5px;
+    border-bottom: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -166,45 +158,54 @@ st.markdown("""
     color: #000;
     font-family: "Courier New", monospace;
     font-weight: bold;
+    cursor: default;
+}
+
+/* Windows 95 Window (titlebar + body) */
+.win95-window {
+    background-color: #c0c0c0;
+    border: 2px solid;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf;
+    box-shadow: 1px 1px 0 #000;
+    margin-bottom: 14px;
 }
 
 /* Windows 95 Panel */
 .win95-panel {
     background-color: #c0c0c0;
     border: 2px solid;
-    border-color: #fff #808080 #808080 #fff;
-    box-shadow: inset -1px -1px 0 #404040, inset 1px 1px 0 #dfdfdf;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf;
+    box-shadow: 1px 1px 0 #000;
     margin-bottom: 12px;
 }
 .win95-panel-content {
     background-color: #fff;
     border: 2px solid;
-    border-color: #808080 #fff #fff #808080;
-    box-shadow: inset 1px 1px 0 #404040, inset -1px -1px 0 #dfdfdf;
-    margin: 4px;
-    padding: 12px;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    margin: 3px;
+    padding: 14px;
     min-height: 60px;
 }
 .win95-panel-content.yellow {
-    background-color: #ffffcc;
+    background-color: #ffffee;
 }
 
 /* Marquee */
 .retro-marquee {
-    background: #000080;
+    background: #c0c0c0;
     border: 2px solid;
     border-color: #808080 #fff #fff #808080;
     box-shadow: inset 1px 1px 0 #404040;
     overflow: hidden;
-    padding: 6px 0;
+    padding: 5px 0;
     margin-bottom: 16px;
 }
 .retro-marquee-inner {
     display: inline-block;
     white-space: nowrap;
-    animation: scroll-left 18s linear infinite;
+    animation: scroll-left 35s linear infinite;
     font-family: "VT323", "Courier New", monospace;
-    font-size: 16px;
+    font-size: 15px;
     letter-spacing: 1px;
 }
 @keyframes scroll-left {
@@ -259,30 +260,38 @@ st.markdown("""
 .hit-counter {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    background: #000;
-    border: 3px solid;
-    border-color: #808080 #fff #fff #808080;
-    box-shadow: inset 1px 1px 0 #404040;
-    padding: 8px 16px;
-    font-family: "VT323", "Courier New", monospace;
-    color: #00ff00;
-    font-size: 18px;
-    letter-spacing: 2px;
+    gap: 16px;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #fff #808080 #808080 #fff;
+    box-shadow: inset -1px -1px 0 #404040, inset 1px 1px 0 #dfdfdf;
+    padding: 10px 20px;
+    font-family: "Courier New", monospace;
+    font-size: 16px;
+    letter-spacing: 1px;
 }
 .hit-counter .label {
     color: #808080;
-    font-size: 12px;
+    font-size: 10px;
     letter-spacing: 1px;
     text-transform: uppercase;
-}
-.hit-counter .value {
-    color: #00ff00;
     font-weight: bold;
 }
-.hit-counter .value.red { color: #ff0000; }
-.hit-counter .value.yellow { color: #ffff00; }
-.hit-counter .value.cyan { color: #00ffff; }
+.hit-counter .value {
+    color: #000080;
+    font-weight: bold;
+    font-size: 18px;
+    background: #fff;
+    border: 1px solid;
+    border-color: #808080 #fff #fff #808080;
+    padding: 2px 8px;
+    display: inline-block;
+    min-width: 50px;
+    text-align: center;
+}
+.hit-counter .value.red { color: #cc0000; }
+.hit-counter .value.yellow { color: #996600; }
+.hit-counter .value.cyan { color: #006699; }
 
 /* Groove HR */
 .groove-hr {
@@ -292,28 +301,28 @@ st.markdown("""
     margin: 16px 0;
 }
 
-/* Construction Stripes */
-.construction-stripes {
-    background: repeating-linear-gradient(
-        45deg,
-        #ffff00,
-        #ffff00 10px,
-        #000000 10px,
-        #000000 20px
-    );
-    padding: 4px;
-}
-.construction-inner {
+/* Status Bar Footer */
+.status-bar {
     background: #c0c0c0;
-    padding: 12px 16px;
     border: 2px solid;
-    border-color: #fff #808080 #808080 #fff;
-    text-align: center;
-    font-family: "Arial Black", Impact, sans-serif;
-    font-weight: 900;
-    font-size: 14px;
-    text-transform: uppercase;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-size: 12px;
     color: #000;
+    margin-top: 20px;
+}
+.status-bar .status-section {
+    border: 1px solid;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    padding: 2px 10px;
+    background: #c0c0c0;
+}
+.status-bar .status-section b {
+    color: #000080;
 }
 
 /* Donut Chart Container */
@@ -326,31 +335,29 @@ st.markdown("""
 /* Score pills */
 .score-pills {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     justify-content: center;
-    margin: 10px 0;
+    margin: 12px 0 4px 0;
     flex-wrap: wrap;
 }
 .score-pill {
-    padding: 4px 12px;
+    padding: 5px 16px;
     border: 2px solid;
-    font-family: "Courier New", monospace;
-    font-weight: bold;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-weight: 700;
     font-size: 13px;
 }
 .score-pill.ai {
-    background: #ffcccc;
-    border-color: #ff0000;
-    color: #800000;
+    background: #c0c0c0;
+    color: #cc0000;
 }
 .score-pill.mixed {
-    background: #ffffcc;
-    border-color: #808000;
+    background: #c0c0c0;
     color: #808000;
 }
 .score-pill.human {
-    background: #ccffcc;
-    border-color: #00aa00;
+    background: #c0c0c0;
     color: #006600;
 }
 
@@ -585,15 +592,19 @@ st.markdown("""
 </div>
 <div class="retro-marquee">
     <div class="retro-marquee-inner">
-        <span style="color:#00ff00;">★ WELCOME TO TURNITOUT ★</span>
-        &nbsp;&nbsp;&nbsp;
-        <span style="color:#ffff00;">100% RULE-BASED ENGINE — ZERO AI — ZERO COST — ZERO DATA STORED</span>
-        &nbsp;&nbsp;&nbsp;
-        <span style="color:#00ffff;">★ SHATTERS N-GRAM CHAINS ★ ROTATES DISCOURSE MARKERS ★ SWAPS 1000+ SYNONYMS ★</span>
-        &nbsp;&nbsp;&nbsp;
-        <span style="color:#ff00ff;">BUILT BY ALEX SHIBU</span>
-        &nbsp;&nbsp;&nbsp;
-        <span style="color:#ff8000;">★ BYPASS TURNITIN • GPTZERO • COPYLEAKS • ZEROGPT ★</span>
+        <span style="color:#000080;">★ TURNITOUT ★</span>
+        &nbsp;&nbsp;—&nbsp;&nbsp;
+        <span style="color:#006600;">"Education is the kindling of a flame, not the filling of a vessel." — Socrates (who never had to cite his sources)</span>
+        &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
+        <span style="color:#800000;">"The only thing I know is that I know nothing." — Also Socrates (still got tenure)</span>
+        &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
+        <span style="color:#800080;">"Tell me and I forget. Teach me and I remember. Involve me and I learn." — Ben Franklin (who definitely plagiarized that from a fortune cookie)</span>
+        &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
+        <span style="color:#cc6600;">"The mind is not a vessel to be filled but a fire to be kindled." — Plutarch (who recycled Socrates and got away with it)</span>
+        &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
+        <span style="color:#006699;">"An investment in knowledge pays the best interest." — Ben Franklin (ironic, from a guy who flew a kite in a storm)</span>
+        &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
+        <span style="color:#000080;">BUILT BY ALEX SHIBU — ZERO AI — 1012+ RULES — BYPASS TURNITIN • GPTZERO • COPYLEAKS</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -628,7 +639,11 @@ if mode == "Humanizer":
         st.markdown("""
         <div class="win95-titlebar">
             <span>📝 INPUT TEXT</span>
-            <span class="blink-new">PASTE HERE</span>
+            <div class="win-buttons">
+                <span class="win-btn">_</span>
+                <span class="win-btn">□</span>
+                <span class="win-btn">X</span>
+            </div>
         </div>
         """, unsafe_allow_html=True)
         input_text = st.text_area(
@@ -658,6 +673,11 @@ if mode == "Humanizer":
         st.markdown("""
         <div class="win95-titlebar">
             <span>📊 AI DETECTION SCORE</span>
+            <div class="win-buttons">
+                <span class="win-btn">_</span>
+                <span class="win-btn">□</span>
+                <span class="win-btn">X</span>
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -694,6 +714,11 @@ if mode == "Humanizer":
         st.markdown("""
         <div class="win95-titlebar">
             <span>🔍 ORIGINAL — SENTENCE ANALYSIS</span>
+            <div class="win-buttons">
+                <span class="win-btn">_</span>
+                <span class="win-btn">□</span>
+                <span class="win-btn">X</span>
+            </div>
         </div>
         """, unsafe_allow_html=True)
         st.markdown(
@@ -713,7 +738,11 @@ if mode == "Humanizer":
         st.markdown("""
         <div class="win95-titlebar" style="background:linear-gradient(to right,#006600,#00aa00);">
             <span>✅ HUMANIZED OUTPUT</span>
-            <span class="blink-new">CLEAN</span>
+            <div class="win-buttons">
+                <span class="win-btn">_</span>
+                <span class="win-btn">□</span>
+                <span class="win-btn">X</span>
+            </div>
         </div>
         """, unsafe_allow_html=True)
         st.text_area(
@@ -873,27 +902,11 @@ elif mode == "Document":
 # ============================================================
 # FOOTER
 # ============================================================
-st.markdown('<div class="groove-hr"></div>', unsafe_allow_html=True)
 st.markdown("""
-<div class="construction-stripes">
-    <div class="construction-inner">
-        <span class="rainbow-text">TURNITOUT</span>
-        <br>
-        <span style="font-size:12px;font-family:Courier New,monospace;color:#808080;">
-            RULE-BASED AI TEXT HUMANIZER // ZERO APIS // ZERO COST
-        </span>
-    </div>
-</div>
-<div class="retro-footer">
-    BUILT BY <b style="color:#000080;">ALEX SHIBU</b> &nbsp;|&nbsp;
-    ENGINE v2.0 &nbsp;|&nbsp;
-    1012+ RULES &nbsp;|&nbsp;
-    VISITORS: <span style="color:#00ff00;">000001</span>
-    <br>
-    <span style="font-size:10px;">
-        BEST VIEWED IN 800x600 &nbsp;|&nbsp;
-        © 2026 ALL RIGHTS RESERVED &nbsp;|&nbsp;
-        <a href="#">GUESTBOOK</a>
-    </span>
+<div class="status-bar">
+    <div class="status-section">Built by <b>Alex Shibu</b></div>
+    <div class="status-section">Engine v2.0 — 11 Stages</div>
+    <div class="status-section">1012+ Rules</div>
+    <div class="status-section">Zero APIs — Zero Cost</div>
 </div>
 """, unsafe_allow_html=True)
