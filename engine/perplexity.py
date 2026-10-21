@@ -67,7 +67,7 @@ def _ai_phrase_density(text_lower, word_count):
     if word_count == 0:
         return 0.0
     hits = sum(1 for phrase in _AI_PHRASES if phrase in text_lower)
-    return hits / max(word_count / 20, 1)
+    return hits / max(word_count / 30, 1)
 
 
 def _connector_density(words_lower):
@@ -134,7 +134,7 @@ def compute_perplexity_score(text: str) -> dict:
 
     # Signal 4: AI phrase density (higher = more AI-like, INVERTED)
     ai_density = _ai_phrase_density(text_lower, word_count)
-    phrase_signal = max(0.0, 1.0 - ai_density * 2.0)
+    phrase_signal = max(0.0, 1.0 - ai_density * 1.5)
 
     # Signal 5: Connector density (AI overuses formal connectors)
     conn_density = _connector_density(words_lower)
@@ -155,16 +155,38 @@ def compute_perplexity_score(text: str) -> dict:
     filler_count = _filler_start_count(text_lower)
     filler_signal = max(0.0, 1.0 - filler_count * 0.3)
 
-    # Weighted combination — phrase detection and connector density matter most
+    # Signal 9: Structural uniformity — AI writes sentences of very similar structure
+    pronoun_starts = sum(
+        1 for s in sentences
+        if re.match(r"^(He |She |His |Her |They |It |The |This |That |These |We |Our )", s.strip())
+    )
+    struct_uniformity = pronoun_starts / max(len(sentences), 1)
+    structure_signal = max(0.0, 1.0 - struct_uniformity * 2.0)
+
+    # Signal 10: Comma density — AI uses lots of list-style commas
+    comma_count = text.count(",")
+    comma_density = comma_count / max(word_count, 1)
+    comma_signal = max(0.0, 1.0 - max(0, comma_density - 0.03) * 12.0)
+
+    # Signal 11: Passive voice / formulaic construction density
+    passive_count = len(re.findall(r"\b(was|were|been|being)\s+\w+ed\b", text_lower))
+    has_involved = len(re.findall(r"\bhas been involved\b|\bhas experience\b|\bhas been\b", text_lower))
+    formulaic = (passive_count + has_involved) / max(len(sentences), 1)
+    formulaic_signal = max(0.0, 1.0 - formulaic * 1.5)
+
+    # Weighted combination — AI-specific behavioral signals dominate
     weights = {
-        "compression": 0.10,
-        "variance": 0.12,
-        "diversity": 0.08,
-        "ai_phrases": 0.25,
-        "connectors": 0.15,
-        "sent_length": 0.10,
-        "repetition": 0.08,
-        "filler": 0.12,
+        "compression": 0.03,
+        "variance": 0.09,
+        "diversity": 0.03,
+        "ai_phrases": 0.22,
+        "connectors": 0.07,
+        "sent_length": 0.09,
+        "repetition": 0.03,
+        "filler": 0.09,
+        "structure": 0.13,
+        "commas": 0.11,
+        "formulaic": 0.11,
     }
 
     signals = {
@@ -176,6 +198,9 @@ def compute_perplexity_score(text: str) -> dict:
         "sent_length": round(length_signal, 3),
         "repetition": round(repetition_signal, 3),
         "filler": round(filler_signal, 3),
+        "structure": round(structure_signal, 3),
+        "commas": round(comma_signal, 3),
+        "formulaic": round(formulaic_signal, 3),
     }
 
     human_score = sum(signals[k] * weights[k] for k in weights)
