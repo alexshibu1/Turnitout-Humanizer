@@ -607,25 +607,29 @@ st.markdown("""
     <div class="retro-marquee-inner">
         ★ TURNITOUT ★
         &nbsp;&nbsp;—&nbsp;&nbsp;
-        "Education is the kindling of a flame, not the filling of a vessel." — Socrates (who never had to cite his sources)
+        "Turned $3K into $100K, then lost it all. Asymmetric outcomes go both ways." — Alex
         &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
-        "The only thing I know is that I know nothing." — Also Socrates (still got tenure)
+        "Education is kindling a flame, not filling a vessel." — Socrates (never cited his sources)
         &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
-        "I didn't cheat, I just had better resources." — Alex Shibu
+        "This isn't cheating. This is a sidequest." — Alex
         &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
-        "Tell me and I forget. Teach me and I remember. Involve me and I learn." — Ben Franklin (who definitely plagiarized that from a fortune cookie)
+        "The only thing I know is that I know nothing." — Socrates (still got tenure)
         &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
-        "If the AI wrote it and I edited it, it's a collaboration. If I just clicked submit, it's delegation." — Alex Shibu
+        "If the AI wrote it and I edited it, that's a collab." — Alex
         &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
-        "The mind is not a vessel to be filled but a fire to be kindled." — Plutarch (who recycled Socrates and got away with it)
+        "The mind is not a vessel to be filled but a fire to be kindled." — Plutarch (recycled Socrates)
         &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
-        "My professor said 'write in your own words.' These are my own words now." — Alex Shibu
+        "God bless the hustle." — Alex
         &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
-        "An investment in knowledge pays the best interest." — Ben Franklin (ironic, from a guy who flew a kite in a storm)
+        "I don't always test my code, but when I do, I do it in production." — Alex
         &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
-        "I don't always test my code, but when I do, I do it in production." — Alex Shibu
+        "Build first. Ask permission never." — Alex
         &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
-        "The best way to predict the future is to build it. The second best way is to humanize the AI that wrote it." — Alex Shibu
+        "Getting dangerous at things is more fun than getting good." — Alex
+        &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
+        "My professor said 'write in your own words.' These are my own words now." — Alex
+        &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
+        "Every rabbit hole is a curriculum no one assigned." — Alex
         &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
         BUILT BY ALEX SHIBU — ZERO AI — 1012+ RULES
     </div>
