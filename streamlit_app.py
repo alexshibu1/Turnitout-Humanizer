@@ -203,10 +203,23 @@ st.markdown("""
 .retro-marquee-inner {
     display: inline-block;
     white-space: nowrap;
-    animation: scroll-left 35s linear infinite;
+    animation: scroll-left 35s linear infinite, marquee-rainbow 6s linear infinite;
     font-family: "VT323", "Courier New", monospace;
     font-size: 15px;
     letter-spacing: 1px;
+    background: linear-gradient(
+        90deg,
+        #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff00ff,
+        #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff00ff
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+@keyframes marquee-rainbow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
 }
 @keyframes scroll-left {
     0% { transform: translateX(100vw); }
@@ -592,19 +605,29 @@ st.markdown("""
 </div>
 <div class="retro-marquee">
     <div class="retro-marquee-inner">
-        <span style="color:#000080;">★ TURNITOUT ★</span>
+        ★ TURNITOUT ★
         &nbsp;&nbsp;—&nbsp;&nbsp;
-        <span style="color:#006600;">"Education is the kindling of a flame, not the filling of a vessel." — Socrates (who never had to cite his sources)</span>
+        "Education is the kindling of a flame, not the filling of a vessel." — Socrates (who never had to cite his sources)
         &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
-        <span style="color:#800000;">"The only thing I know is that I know nothing." — Also Socrates (still got tenure)</span>
+        "The only thing I know is that I know nothing." — Also Socrates (still got tenure)
         &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
-        <span style="color:#800080;">"Tell me and I forget. Teach me and I remember. Involve me and I learn." — Ben Franklin (who definitely plagiarized that from a fortune cookie)</span>
+        "I didn't cheat, I just had better resources." — Alex Shibu
         &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
-        <span style="color:#cc6600;">"The mind is not a vessel to be filled but a fire to be kindled." — Plutarch (who recycled Socrates and got away with it)</span>
+        "Tell me and I forget. Teach me and I remember. Involve me and I learn." — Ben Franklin (who definitely plagiarized that from a fortune cookie)
         &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
-        <span style="color:#006699;">"An investment in knowledge pays the best interest." — Ben Franklin (ironic, from a guy who flew a kite in a storm)</span>
+        "If the AI wrote it and I edited it, it's a collaboration. If I just clicked submit, it's delegation." — Alex Shibu
         &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
-        <span style="color:#000080;">BUILT BY ALEX SHIBU — ZERO AI — 1012+ RULES — BYPASS TURNITIN • GPTZERO • COPYLEAKS</span>
+        "The mind is not a vessel to be filled but a fire to be kindled." — Plutarch (who recycled Socrates and got away with it)
+        &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
+        "My professor said 'write in your own words.' These are my own words now." — Alex Shibu
+        &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
+        "An investment in knowledge pays the best interest." — Ben Franklin (ironic, from a guy who flew a kite in a storm)
+        &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
+        "I don't always test my code, but when I do, I do it in production." — Alex Shibu
+        &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
+        "The best way to predict the future is to build it. The second best way is to humanize the AI that wrote it." — Alex Shibu
+        &nbsp;&nbsp;&nbsp;★&nbsp;&nbsp;&nbsp;
+        BUILT BY ALEX SHIBU — ZERO AI — 1012+ RULES
     </div>
 </div>
 """, unsafe_allow_html=True)
