@@ -6,8 +6,8 @@ runOnSave = false
 fastReruns = true
 
 [theme]
-primaryColor = "#f48fb1"
-backgroundColor = "#fdf2f8"
-secondaryBackgroundColor = "#fce4ec"
-textColor = "#4a1942"
+primaryColor = "#000080"
+backgroundColor = "#c0c0c0"
+secondaryBackgroundColor = "#a0a0a0"
+textColor = "#000000"
 font = "sans serif"
