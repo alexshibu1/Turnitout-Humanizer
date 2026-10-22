@@ -67,10 +67,11 @@ header[data-testid="stHeader"] {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Main content block — frosted so text is readable over Bliss */
+/* Main content block — frosted glass so Bliss shows through */
 [data-testid="stMainBlockContainer"] {
-    background: rgba(192, 192, 192, 0.88) !important;
-    backdrop-filter: blur(2px);
+    background: rgba(192, 192, 192, 0.55) !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     border: 2px solid;
     border-color: #dfdfdf #808080 #808080 #dfdfdf;
     padding: 16px !important;
@@ -87,7 +88,9 @@ header[data-testid="stHeader"] {
 
 /* ---- SIDEBAR ---- */
 [data-testid="stSidebar"] {
-    background-color: #c0c0c0 !important;
+    background: rgba(192, 192, 192, 0.75) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-right: 2px solid;
     border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
 }
