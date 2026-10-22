@@ -63,23 +63,8 @@ header[data-testid="stHeader"] {
 }
 
 .stApp {
-    background: linear-gradient(
-        180deg,
-        #4a90d9 0%,
-        #87ceeb 15%,
-        #b0e0f0 25%,
-        #c8e8f0 30%,
-        #d0f0d0 35%,
-        #5cb85c 42%,
-        #4cae4c 50%,
-        #3d9140 55%,
-        #5cb85c 60%,
-        #6ec96e 65%,
-        #4cae4c 70%,
-        #3d8b3d 80%,
-        #2d6e2d 100%
-    ) !important;
-    background-attachment: fixed !important;
+    background: url('app/static/bliss.jpg') no-repeat center center fixed !important;
+    background-size: cover !important;
     min-height: 100vh;
 }
 
