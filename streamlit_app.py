@@ -58,15 +58,25 @@ st.markdown("""
 [data-testid="stDecoration"] { display: none !important; }
 [data-testid="stStatusWidget"] { display: none !important; }
 
-/* Sidebar toggle buttons — rainbow, bold, impossible to miss */
+/* Sidebar toggle buttons — rainbow, big, always visible */
 @keyframes hamburger-rainbow {
-    0% { background: #ff0000; }
-    16% { background: #ff8800; }
-    33% { background: #ffff00; }
-    50% { background: #00cc00; }
-    66% { background: #0066ff; }
-    83% { background: #8800ff; }
-    100% { background: #ff0000; }
+    0% { background-color: #ff0000; }
+    16% { background-color: #ff8800; }
+    33% { background-color: #ffff00; }
+    50% { background-color: #00cc00; }
+    66% { background-color: #0066ff; }
+    83% { background-color: #8800ff; }
+    100% { background-color: #ff0000; }
+}
+/* Force the toggle container always visible (Streamlit hides on no-hover) */
+[data-testid="stSidebarCollapseButton"],
+[data-testid="stExpandSidebarButton"],
+[data-testid="collapsedControl"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+    position: relative !important;
+    z-index: 999999 !important;
 }
 [data-testid="stSidebarCollapseButton"] button,
 [data-testid="stExpandSidebarButton"],
@@ -74,19 +84,23 @@ st.markdown("""
     animation: hamburger-rainbow 2s linear infinite !important;
     color: #fff !important;
     border: 3px solid #fff !important;
-    min-width: 52px !important;
-    min-height: 52px !important;
-    padding: 10px !important;
-    box-shadow: 2px 2px 0 #000, 0 0 12px rgba(255,255,255,0.5) !important;
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+    min-height: 56px !important;
+    padding: 12px !important;
+    box-shadow: 2px 2px 0 #000, 0 0 10px rgba(0,0,0,0.3) !important;
     font-weight: 900 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 [data-testid="stSidebarCollapseButton"] svg,
 [data-testid="stExpandSidebarButton"] svg,
 [data-testid="collapsedControl"] svg {
     color: #fff !important;
-    width: 30px !important;
-    height: 30px !important;
-    filter: drop-shadow(0 0 4px rgba(255,255,255,0.8)) !important;
+    width: 32px !important;
+    height: 32px !important;
+    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.5)) !important;
 }
 
 /* ---- GLOBAL RESET ---- */
