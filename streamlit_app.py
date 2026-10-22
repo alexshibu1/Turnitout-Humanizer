@@ -58,25 +58,35 @@ st.markdown("""
 [data-testid="stDecoration"] { display: none !important; }
 [data-testid="stStatusWidget"] { display: none !important; }
 
-/* Sidebar toggle buttons — big navy Win95 style */
+/* Sidebar toggle buttons — rainbow, bold, impossible to miss */
+@keyframes hamburger-rainbow {
+    0% { background: #ff0000; }
+    16% { background: #ff8800; }
+    33% { background: #ffff00; }
+    50% { background: #00cc00; }
+    66% { background: #0066ff; }
+    83% { background: #8800ff; }
+    100% { background: #ff0000; }
+}
 [data-testid="stSidebarCollapseButton"] button,
 [data-testid="stExpandSidebarButton"],
 [data-testid="collapsedControl"] button {
-    background: #000080 !important;
+    animation: hamburger-rainbow 2s linear infinite !important;
     color: #fff !important;
-    border: 2px solid !important;
-    border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
-    min-width: 48px !important;
-    min-height: 48px !important;
+    border: 3px solid #fff !important;
+    min-width: 52px !important;
+    min-height: 52px !important;
     padding: 10px !important;
-    box-shadow: 2px 2px 0 #000 !important;
+    box-shadow: 2px 2px 0 #000, 0 0 12px rgba(255,255,255,0.5) !important;
+    font-weight: 900 !important;
 }
 [data-testid="stSidebarCollapseButton"] svg,
 [data-testid="stExpandSidebarButton"] svg,
 [data-testid="collapsedControl"] svg {
     color: #fff !important;
-    width: 28px !important;
-    height: 28px !important;
+    width: 30px !important;
+    height: 30px !important;
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.8)) !important;
 }
 
 /* ---- GLOBAL RESET ---- */
@@ -591,14 +601,14 @@ st.markdown("""
     font-family: "VT323", "Courier New", monospace;
     font-size: 24px;
     color: #00ff00;
-    background: #000;
+    background: #0a1a0a;
     border: 2px solid;
     border-color: #808080 #dfdfdf #dfdfdf #808080;
     padding: 6px 14px;
     text-align: center;
     letter-spacing: 3px;
     text-shadow: 0 0 6px #00ff00;
-    margin: 8px 0;
+    margin: 4px 0 2px 0;
 }
 
 /* Sidebar mini hit counter */
@@ -607,23 +617,25 @@ st.markdown("""
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background: #000;
+    background: #c0c0c0;
     border: 2px solid;
     border-color: #808080 #dfdfdf #dfdfdf #808080;
     padding: 6px 12px;
-    margin: 8px 0;
+    margin: 2px 0 8px 0;
     font-family: "Courier New", monospace;
     font-size: 12px;
-    color: #00ff00;
+    color: #000;
+    font-weight: bold;
 }
 .mini-hit-counter .counter-digits {
     font-family: "VT323", "Courier New", monospace;
     font-size: 18px;
-    color: #ff0000;
+    color: #cc0000;
     letter-spacing: 2px;
-    background: #1a0000;
+    background: #fff;
     padding: 2px 8px;
-    border: 1px solid #800000;
+    border: 2px solid;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
 }
 
 /* Sidebar taskbar */
