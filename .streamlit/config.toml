@@ -8,7 +8,7 @@ fastReruns = true
 
 [theme]
 primaryColor = "#000080"
-backgroundColor = "#c0c0c0"
+backgroundColor = "#ffffff"
 secondaryBackgroundColor = "#a0a0a0"
 textColor = "#000000"
 font = "sans serif"

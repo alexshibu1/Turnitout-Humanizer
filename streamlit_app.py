@@ -2,10 +2,15 @@ import streamlit as st
 import re
 import math
 import io
+import base64
+import pathlib
 from engine.transformer import TextTransformer
 from engine.perplexity import compute_perplexity_score
 from engine.unicode_purge import purge_zero_width
 from engine.docx_processor import read_docx, write_docx
+
+_BLISS_PATH = pathlib.Path(__file__).parent / "assets" / "bliss.jpg"
+_BLISS_B64 = base64.b64encode(_BLISS_PATH.read_bytes()).decode()
 
 st.set_page_config(
     page_title="TURNITOUT.EXE — Alex's AI Humanizer",
@@ -17,6 +22,24 @@ st.set_page_config(
 # ============================================================
 # RETRO 90s CSS — Windows 95 Design System
 # ============================================================
+_bliss_css = f"""
+.stApp {{
+    background-image: url('data:image/jpeg;base64,{_BLISS_B64}') !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    background-color: #3a7bd5 !important;
+    min-height: 100vh;
+}}
+[data-testid="stAppViewContainer"] {{
+    background: transparent !important;
+}}
+[data-testid="stMain"] {{
+    background: transparent !important;
+}}
+"""
+
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
@@ -60,12 +83,6 @@ header[data-testid="stHeader"] {
 }
 .block-container {
     padding-top: 0 !important;
-}
-
-.stApp {
-    background: url('app/static/bliss.jpg') no-repeat center center fixed !important;
-    background-size: cover !important;
-    min-height: 100vh;
 }
 
 /* ---- SIDEBAR ---- */
@@ -526,6 +543,8 @@ header[data-testid="stHeader"] {
 }
 </style>
 """, unsafe_allow_html=True)
+
+st.markdown(f"<style>{_bliss_css}</style>", unsafe_allow_html=True)
 
 
 # ============================================================
