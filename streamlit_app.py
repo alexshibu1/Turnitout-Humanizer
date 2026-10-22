@@ -781,8 +781,8 @@ st.markdown("""
         padding-right: 6px !important;
         max-width: 100% !important;
     }
-    /* Hide Streamlit toolbar icons on mobile */
-    [data-testid="stToolbar"] { display: none !important; }
+    /* Hide Streamlit toolbar actions on mobile but keep sidebar toggle */
+    [data-testid="stToolbar"] [data-testid="stToolbarActions"] { display: none !important; }
 
     /* Title bar — bigger text */
     .win95-titlebar { font-size: 15px !important; padding: 10px 12px !important; }
