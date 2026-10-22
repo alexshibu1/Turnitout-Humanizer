@@ -67,6 +67,23 @@ header[data-testid="stHeader"] {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Prevent iOS zoom on input focus */
+input, select, textarea {
+    font-size: 16px !important;
+}
+
+/* iOS safe area support */
+.stApp {
+    padding-top: env(safe-area-inset-top) !important;
+    padding-bottom: env(safe-area-inset-bottom) !important;
+}
+
+/* Smooth scrolling on iOS */
+[data-testid="stMainBlockContainer"],
+[data-testid="stSidebar"] > div {
+    -webkit-overflow-scrolling: touch;
+}
+
 /* Main content block — frosted glass so Bliss shows through */
 [data-testid="stMainBlockContainer"] {
     background: rgba(192, 192, 192, 0.55) !important;
@@ -719,6 +736,187 @@ header[data-testid="stHeader"] {
     align-self: center;
     font-weight: 900;
     padding-top: 30px;
+}
+
+/* ============================================================
+   MOBILE RESPONSIVE
+   ============================================================ */
+@media screen and (max-width: 768px) {
+    /* Main container — full-width, no border clipping */
+    [data-testid="stMainBlockContainer"] {
+        padding: 8px !important;
+        margin: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: rgba(192, 192, 192, 0.7) !important;
+    }
+    .block-container {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    /* Header — smaller text, tighter padding */
+    .win95-titlebar {
+        font-size: 12px !important;
+        padding: 6px 8px !important;
+        letter-spacing: 0.5px !important;
+    }
+    .win95-titlebar span {
+        letter-spacing: 0.5px !important;
+        font-size: 12px !important;
+    }
+    .win95-titlebar .win-buttons {
+        display: none !important;
+    }
+
+    /* Marquee — smaller */
+    .retro-marquee { padding: 4px 0; margin-bottom: 8px; }
+    .retro-marquee-inner { font-size: 14px; }
+
+    /* Columns — stack vertically */
+    [data-testid="stHorizontalBlock"] {
+        flex-direction: column !important;
+    }
+    [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        min-width: 0 !important;
+    }
+
+    /* Text areas — shorter on mobile */
+    .stTextArea textarea {
+        font-size: 13px !important;
+        min-height: 150px !important;
+    }
+
+    /* Buttons — full width, bigger tap target */
+    .stButton > button,
+    .stButton > button[kind="primary"] {
+        font-size: 14px !important;
+        padding: 12px 16px !important;
+        min-height: 44px;
+    }
+
+    /* Before/After comparison — stack vertically */
+    .ba-compare {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 8px !important;
+    }
+    .ba-card {
+        min-width: unset !important;
+        max-width: 200px !important;
+    }
+    .ba-arrow {
+        font-size: 24px !important;
+        padding-top: 0 !important;
+        transform: rotate(90deg);
+    }
+
+    /* Hit counter — wrap and shrink */
+    .hit-counter {
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        padding: 8px 12px !important;
+        justify-content: center;
+    }
+    .hit-counter .value {
+        font-size: 14px !important;
+        min-width: 40px !important;
+        padding: 2px 6px !important;
+    }
+    .hit-counter .label {
+        font-size: 9px !important;
+    }
+
+    /* Score pills — smaller */
+    .score-pills { gap: 6px; }
+    .score-pill { padding: 4px 10px; font-size: 12px; }
+
+    /* Copy button — full width */
+    .copy-btn-wrap { text-align: center; }
+    .copy-btn-wrap button {
+        width: 100%;
+        padding: 10px 16px !important;
+        font-size: 14px !important;
+        min-height: 44px;
+    }
+
+    /* Status bar footer — stack */
+    .status-bar {
+        flex-wrap: wrap !important;
+        gap: 4px !important;
+        justify-content: center !important;
+        padding: 6px 8px !important;
+    }
+    .status-bar .status-section {
+        font-size: 10px !important;
+        padding: 2px 6px !important;
+    }
+
+    /* Panels — less padding */
+    .win95-panel-content {
+        padding: 8px !important;
+    }
+
+    /* Sentence rows — tighter */
+    .sent-row { padding: 4px 6px; font-size: 12px; }
+    .sent-badge { min-width: 32px; font-size: 10px; padding: 2px 4px; }
+
+    /* Feature boxes in sidebar */
+    .sidebar-feature-box { font-size: 12px; padding: 8px 10px; }
+    .sidebar-feature-box li { font-size: 11px; }
+
+    /* Sidebar taskbar */
+    .sidebar-taskbar { font-size: 10px; padding: 2px 4px; }
+    .taskbar-start { font-size: 10px; padding: 2px 6px 2px 3px; }
+
+    /* Retro clock — smaller */
+    .retro-clock { font-size: 18px; padding: 4px 10px; letter-spacing: 2px; }
+
+    /* Table overflows */
+    .xerox-table, table { font-size: 12px; }
+    .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+
+/* Extra small screens (phones in portrait — iPhone Pro etc) */
+@media screen and (max-width: 480px) {
+    .win95-titlebar {
+        font-size: 11px !important;
+        padding: 5px 6px !important;
+    }
+    .win95-titlebar span {
+        font-size: 11px !important;
+    }
+    .retro-marquee-inner { font-size: 12px; }
+    .ba-card { max-width: 160px !important; }
+    .retro-clock { font-size: 16px; }
+    .mini-hit-counter { font-size: 10px; padding: 4px 8px; }
+    .mini-hit-counter .counter-digits { font-size: 14px; }
+    .hit-counter {
+        font-size: 12px !important;
+        padding: 6px 8px !important;
+    }
+    /* Sidebar collapses on mobile — make overlay solid */
+    [data-testid="stSidebar"] {
+        background: rgba(192, 192, 192, 0.95) !important;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    /* Full bleed main content */
+    [data-testid="stMainBlockContainer"] {
+        background: rgba(192, 192, 192, 0.8) !important;
+    }
+    /* Donut SVGs — prevent overflow */
+    .win95-panel-content svg {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    /* Highlighted text — word break */
+    .highlighted-text {
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
 }
 
 /* Reduced motion */
