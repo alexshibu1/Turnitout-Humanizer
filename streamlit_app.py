@@ -538,11 +538,195 @@ header[data-testid="stHeader"] {
 .retro-footer a { color: #0000ff; text-decoration: underline; }
 .retro-footer a:hover { color: #ff0000; }
 
+/* ---- SIDEBAR SPICE ---- */
+
+/* Blinking online indicator */
+@keyframes blink-online {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+.online-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    font-weight: bold;
+    color: #008000;
+    padding: 4px 10px;
+    background: #000;
+    border: 1px solid;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    margin: 6px 0;
+}
+.online-dot {
+    width: 8px;
+    height: 8px;
+    background: #00ff00;
+    border-radius: 50% !important;
+    animation: blink-online 1.5s ease-in-out infinite;
+    box-shadow: 0 0 4px #00ff00;
+}
+
+/* Sidebar retro clock */
+.retro-clock {
+    font-family: "VT323", "Courier New", monospace;
+    font-size: 24px;
+    color: #00ff00;
+    background: #000;
+    border: 2px solid;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    padding: 6px 14px;
+    text-align: center;
+    letter-spacing: 3px;
+    text-shadow: 0 0 6px #00ff00;
+    margin: 8px 0;
+}
+
+/* Sidebar mini hit counter */
+.mini-hit-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #000;
+    border: 2px solid;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    padding: 6px 12px;
+    margin: 8px 0;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    color: #00ff00;
+}
+.mini-hit-counter .counter-digits {
+    font-family: "VT323", "Courier New", monospace;
+    font-size: 18px;
+    color: #ff0000;
+    letter-spacing: 2px;
+    background: #1a0000;
+    padding: 2px 8px;
+    border: 1px solid #800000;
+}
+
+/* Sidebar taskbar */
+.sidebar-taskbar {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf;
+    padding: 3px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-size: 11px;
+    color: #000;
+    margin-top: 12px;
+}
+.taskbar-start {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf;
+    padding: 2px 10px 2px 4px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+}
+.taskbar-tray {
+    border: 1px solid;
+    border-color: #808080 #dfdfdf #dfdfdf #808080;
+    padding: 2px 8px;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+}
+
+/* Tone preset buttons */
+.preset-row {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin: 6px 0 10px 0;
+}
+.preset-btn {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf;
+    padding: 4px 10px;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #000;
+}
+.preset-btn:hover {
+    background: #d4d4d4;
+}
+.preset-btn.active {
+    border-color: #404040 #dfdfdf #dfdfdf #404040;
+    background: #a0a0a0;
+}
+
+/* Copy button */
+.copy-btn-wrap {
+    text-align: right;
+    margin: -4px 0 8px 0;
+}
+.copy-btn-wrap button {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf;
+    padding: 6px 18px;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #000;
+    text-transform: uppercase;
+}
+.copy-btn-wrap button:active {
+    border-color: #404040 #dfdfdf #dfdfdf #404040;
+}
+
+/* Before/After comparison */
+.ba-compare {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.ba-card {
+    flex: 1;
+    min-width: 180px;
+    max-width: 260px;
+    text-align: center;
+}
+.ba-label {
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    padding: 4px 0;
+}
+.ba-label.before { color: #cc0000; background: #ffcccc; border: 1px solid #cc0000; }
+.ba-label.after { color: #006600; background: #ccffcc; border: 1px solid #006600; }
+.ba-arrow {
+    font-size: 36px;
+    color: #000080;
+    align-self: center;
+    font-weight: 900;
+    padding-top: 30px;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
     .rainbow-text { animation: none; color: #ff0000; }
     .blink-new { animation: none; }
     .retro-marquee-inner { animation: none; }
+    .online-dot { animation: none; }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -663,6 +847,7 @@ def render_sentence_list(text):
 for key, default in [
     ("result", None), ("stats", None), ("input_text", ""),
     ("ai_pct", 0), ("human_pct", 0),
+    ("before_ai_pct", 0), ("before_human_pct", 0),
 ]:
     if key not in st.session_state:
         st.session_state[key] = default
@@ -671,6 +856,10 @@ for key, default in [
 # ============================================================
 # SIDEBAR
 # ============================================================
+import random
+if "visitor_count" not in st.session_state:
+    st.session_state.visitor_count = random.randint(48200, 51999)
+
 with st.sidebar:
     st.markdown("""
     <div class="win95-titlebar" style="margin-bottom:0;padding:6px 10px;">
@@ -685,8 +874,29 @@ with st.sidebar:
         <div class="operator-name" style="font-size:16px;">ALEX SHIBU</div>
         <div class="tagline">Physics + CS // UofToronto</div>
         <div class="tagline">God Bless the Hustle 🚢</div>
-        <a href="https://alexshibu.com" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;color:#0000ff;font-family:'Courier New',monospace;font-size:11px;text-decoration:underline;font-weight:bold;">🌐 alexshibu.com</a>
+        <div class="online-indicator"><span class="online-dot"></span> ONLINE — READY</div>
+        <a href="https://alexshibu.com" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:6px;color:#0000ff;font-family:'Courier New',monospace;font-size:11px;text-decoration:underline;font-weight:bold;">🌐 alexshibu.com</a>
     </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+    <div class="retro-clock" id="retroClock">00:00:00</div>
+    <div class="mini-hit-counter">
+        <span>👁 VISITORS:</span>
+        <span class="counter-digits">{st.session_state.visitor_count:06d}</span>
+    </div>
+    <script>
+    function updateClock() {{
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2, '0');
+        const m = String(now.getMinutes()).padStart(2, '0');
+        const s = String(now.getSeconds()).padStart(2, '0');
+        const els = document.querySelectorAll('#retroClock, .retro-clock');
+        els.forEach(el => {{ el.textContent = h + ':' + m + ':' + s; }});
+    }}
+    updateClock();
+    setInterval(updateClock, 1000);
+    </script>
     """, unsafe_allow_html=True)
 
     st.markdown("""
@@ -706,9 +916,27 @@ with st.sidebar:
     mode = st.radio("Select mode", ["Humanizer", "Scanner", "Document"], index=0, label_visibility="collapsed")
 
     st.markdown('<div class="groove-hr"></div>', unsafe_allow_html=True)
-    st.markdown("##### SETTINGS")
+    st.markdown("##### WRITING STYLE")
 
-    aggressiveness = st.slider("REWRITE INTENSITY", 0.1, 1.0, 0.55, 0.05)
+    PRESETS = {
+        "📄 Academic": 0.70,
+        "✏️ Essay": 0.45,
+        "🔬 Lab Report": 0.60,
+        "💬 Casual": 0.35,
+        "⚙️ Custom": None,
+    }
+    preset = st.radio("Select style", list(PRESETS.keys()), index=0, label_visibility="collapsed", horizontal=True)
+
+    if PRESETS[preset] is not None:
+        aggressiveness = PRESETS[preset]
+        st.markdown(
+            f'<div style="font-family:Courier New,monospace;font-size:12px;'
+            f'color:#000080;margin:-8px 0 8px 0;">'
+            f'INTENSITY: <b>{aggressiveness:.2f}</b></div>',
+            unsafe_allow_html=True,
+        )
+    else:
+        aggressiveness = st.slider("REWRITE INTENSITY", 0.1, 1.0, 0.55, 0.05)
 
     purge_unicode = st.checkbox("PURGE ZERO-WIDTH UNICODE", value=True)
 
@@ -725,6 +953,26 @@ with st.sidebar:
             <li>Originality.ai</li>
         </ul>
     </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+    <div class="sidebar-taskbar">
+        <div class="taskbar-start">🪟 Start</div>
+        <div style="flex:1;"></div>
+        <div class="taskbar-tray" id="trayTime">--:--</div>
+    </div>
+    <script>
+    function updateTray() {{
+        const now = new Date();
+        const h = now.getHours() % 12 || 12;
+        const m = String(now.getMinutes()).padStart(2, '0');
+        const ap = now.getHours() >= 12 ? 'PM' : 'AM';
+        const els = document.querySelectorAll('#trayTime, .taskbar-tray');
+        els.forEach(el => {{ el.textContent = h + ':' + m + ' ' + ap; }});
+    }}
+    updateTray();
+    setInterval(updateTray, 1000);
+    </script>
     """, unsafe_allow_html=True)
 
 
@@ -824,6 +1072,9 @@ if mode == "Humanizer":
 
     if humanize_clicked and input_text.strip():
         with st.spinner("PROCESSING..."):
+            before = compute_perplexity_score(input_text)
+            before_human = before["combined_score"]
+            before_ai = max(0, 100 - before_human)
             result, stats, ai_pct, human_pct = run_transform(
                 input_text, aggressiveness, purge_unicode, seed
             )
@@ -832,6 +1083,8 @@ if mode == "Humanizer":
         st.session_state.input_text = input_text
         st.session_state.ai_pct = ai_pct
         st.session_state.human_pct = human_pct
+        st.session_state.before_ai_pct = before_ai
+        st.session_state.before_human_pct = before_human
 
     with col_score:
         st.markdown("""
@@ -848,14 +1101,26 @@ if mode == "Humanizer":
         if st.session_state.result:
             ai = st.session_state.ai_pct
             human = st.session_state.human_pct
+            b_ai = st.session_state.before_ai_pct
+            b_human = st.session_state.before_human_pct
+            drop = b_ai - ai
             st.markdown(
                 f'<div class="win95-panel"><div class="win95-panel-content" '
-                f'style="text-align:center;padding:16px;">'
-                f'{render_donut_svg(ai, human)}'
-                f'<div class="score-pills">'
-                f'<span class="score-pill ai">AI {ai:.0f}%</span>'
-                f'<span class="score-pill human">HUMAN {human:.0f}%</span>'
+                f'style="text-align:center;padding:12px;">'
+                f'<div class="ba-compare">'
+                f'<div class="ba-card">'
+                f'<div class="ba-label before">BEFORE</div>'
+                f'{render_donut_svg(b_ai, b_human, 140)}'
                 f'</div>'
+                f'<div class="ba-arrow">→</div>'
+                f'<div class="ba-card">'
+                f'<div class="ba-label after">AFTER</div>'
+                f'{render_donut_svg(ai, human, 140)}'
+                f'</div>'
+                f'</div>'
+                f'<div style="margin-top:8px;font-family:Courier New,monospace;'
+                f'font-size:13px;font-weight:bold;color:#006600;">'
+                f'AI SCORE DROPPED {drop:.0f} POINTS</div>'
                 f'</div></div>',
                 unsafe_allow_html=True,
             )
@@ -914,6 +1179,18 @@ if mode == "Humanizer":
             st.session_state.result,
             height=250,
             label_visibility="collapsed",
+        )
+
+        escaped_result = html_escape(st.session_state.result).replace("'", "\\'").replace("\n", "\\n")
+        st.markdown(
+            f'''<div class="copy-btn-wrap">
+            <button onclick="
+                navigator.clipboard.writeText('{escaped_result}');
+                this.textContent='✅ COPIED!';
+                setTimeout(()=>this.textContent='📋 COPY TO CLIPBOARD', 1500);
+            ">📋 COPY TO CLIPBOARD</button>
+            </div>''',
+            unsafe_allow_html=True,
         )
 
         # Stats hit counter
