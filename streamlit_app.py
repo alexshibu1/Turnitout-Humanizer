@@ -21,6 +21,23 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
+/* ---- HIDE STREAMLIT DEFAULT HEADER ---- */
+[data-testid="stHeader"] {
+    display: none !important;
+}
+[data-testid="stToolbar"] {
+    display: none !important;
+}
+header[data-testid="stHeader"] {
+    display: none !important;
+}
+.stApp > header {
+    display: none !important;
+}
+#MainMenu {
+    display: none !important;
+}
+
 /* ---- GLOBAL RESET ---- */
 *, *::before, *::after {
     border-radius: 0 !important;
@@ -34,8 +51,15 @@ st.markdown("""
     border: 2px solid;
     border-color: #dfdfdf #808080 #808080 #dfdfdf;
     padding: 16px !important;
-    margin-top: 8px;
+    padding-top: 0 !important;
+    margin-top: 0;
     box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+}
+.stApp [data-testid="stAppViewBlockContainer"] {
+    padding-top: 0 !important;
+}
+.block-container {
+    padding-top: 0 !important;
 }
 
 .stApp {
@@ -642,18 +666,19 @@ for key, default in [
 # ============================================================
 with st.sidebar:
     st.markdown("""
-    <div class="win95-titlebar" style="margin-bottom:0;">
-        <span>TURNITOUT.EXE</span>
+    <div class="win95-titlebar" style="margin-bottom:0;padding:6px 10px;">
+        <span style="font-size:14px;letter-spacing:1px;">⚡ TURNITOUT.EXE</span>
         <div class="win-buttons">
             <span class="win-btn">_</span>
             <span class="win-btn">□</span>
             <span class="win-btn">X</span>
         </div>
     </div>
-    <div class="sidebar-info" style="margin-top:0;border-top:none;">
-        <div class="operator-name">ALEX SHIBU</div>
+    <div class="sidebar-info" style="margin-top:0;border-top:none;padding:14px 12px;">
+        <div class="operator-name" style="font-size:16px;">ALEX SHIBU</div>
         <div class="tagline">Physics + CS // UofToronto</div>
         <div class="tagline">God Bless the Hustle 🚢</div>
+        <a href="https://alexshibu.com" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;color:#0000ff;font-family:'Courier New',monospace;font-size:11px;text-decoration:underline;font-weight:bold;">🌐 alexshibu.com</a>
     </div>
     """, unsafe_allow_html=True)
 
@@ -700,8 +725,8 @@ with st.sidebar:
 # HEADER
 # ============================================================
 st.markdown("""
-<div class="win95-titlebar" style="font-size:16px;padding:6px 12px;margin-bottom:0;">
-    <span>🖥️ TURNITOUT — AI TEXT HUMANIZER</span>
+<div class="win95-titlebar" style="font-size:20px;padding:12px 16px;margin-bottom:0;position:relative;z-index:999;">
+    <span style="letter-spacing:1.5px;">🖥️ TURNITOUT — AI TEXT HUMANIZER</span>
     <div class="win-buttons">
         <span class="win-btn">_</span>
         <span class="win-btn">□</span>
@@ -1036,7 +1061,7 @@ elif mode == "Document":
 # ============================================================
 st.markdown("""
 <div class="status-bar">
-    <div class="status-section">Built by <b>Alex Shibu</b></div>
+    <div class="status-section">Built by <b><a href="https://alexshibu.com" target="_blank" rel="noopener noreferrer" style="color:#000080;text-decoration:underline;">Alex Shibu</a></b></div>
     <div class="status-section">Engine v2.0 — 11 Stages</div>
     <div class="status-section">1012+ Rules</div>
     <div class="status-section">Zero APIs — Zero Cost</div>
