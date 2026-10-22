@@ -58,6 +58,27 @@ st.markdown("""
 [data-testid="stDecoration"] { display: none !important; }
 [data-testid="stStatusWidget"] { display: none !important; }
 
+/* Sidebar toggle buttons — big navy Win95 style */
+[data-testid="stSidebarCollapseButton"] button,
+[data-testid="stExpandSidebarButton"],
+[data-testid="collapsedControl"] button {
+    background: #000080 !important;
+    color: #fff !important;
+    border: 2px solid !important;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    padding: 10px !important;
+    box-shadow: 2px 2px 0 #000 !important;
+}
+[data-testid="stSidebarCollapseButton"] svg,
+[data-testid="stExpandSidebarButton"] svg,
+[data-testid="collapsedControl"] svg {
+    color: #fff !important;
+    width: 28px !important;
+    height: 28px !important;
+}
+
 /* ---- GLOBAL RESET ---- */
 *, *::before, *::after {
     border-radius: 0 !important;
