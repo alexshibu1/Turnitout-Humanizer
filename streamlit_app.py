@@ -49,6 +49,27 @@ st.markdown("""
 #MainMenu { display: none !important; }
 [data-testid="stDecoration"] { display: none !important; }
 
+/* Sidebar open/close toggle — always visible */
+[data-testid="collapsedControl"] {
+    z-index: 999999 !important;
+    position: fixed !important;
+    top: 6px !important;
+    left: 6px !important;
+}
+[data-testid="collapsedControl"] button {
+    background: #000080 !important;
+    color: #fff !important;
+    border: 2px solid #dfdfdf !important;
+    padding: 8px 12px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+}
+[data-testid="collapsedControl"] svg {
+    color: #fff !important;
+    width: 20px !important;
+    height: 20px !important;
+}
+
 /* ---- GLOBAL RESET ---- */
 *, *::before, *::after {
     border-radius: 0 !important;
@@ -93,11 +114,23 @@ input, select, textarea {
 
 /* ---- SIDEBAR ---- */
 [data-testid="stSidebar"] {
-    background: rgba(192, 192, 192, 0.75) !important;
+    background: rgba(192, 192, 192, 0.85) !important;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-right: 2px solid;
     border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
+    display: flex !important;
+    min-width: 280px !important;
+    z-index: 1000 !important;
+}
+[data-testid="stSidebar"] > div,
+[data-testid="stSidebar"] > div > div,
+[data-testid="stSidebarContent"] {
+    background: transparent !important;
+}
+[data-testid="stSidebar"][aria-expanded="false"] {
+    display: none !important;
+    min-width: 0 !important;
 }
 [data-testid="stSidebar"] .stMarkdown h2,
 [data-testid="stSidebar"] .stMarkdown h3,
