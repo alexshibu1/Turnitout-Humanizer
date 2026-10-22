@@ -767,45 +767,81 @@ st.markdown("""
 
 /* ---- MOBILE RESPONSIVE (≤768px) ---- */
 @media screen and (max-width: 768px) {
+    /* Full-bleed container */
     [data-testid="stMainBlockContainer"] {
-        padding: 8px !important;
+        padding: 10px !important;
         margin: 0 !important;
         border: none !important;
         box-shadow: none !important;
-        background: rgba(192, 192, 192, 0.7) !important;
+        background: rgba(192, 192, 192, 0.75) !important;
+        max-width: 100% !important;
     }
-    .block-container { padding-left: 8px !important; padding-right: 8px !important; }
-    .win95-titlebar { font-size: 12px !important; padding: 6px 8px !important; }
+    .block-container {
+        padding-left: 6px !important;
+        padding-right: 6px !important;
+        max-width: 100% !important;
+    }
+    /* Hide Streamlit toolbar icons on mobile */
+    [data-testid="stToolbar"] { display: none !important; }
+
+    /* Title bar — bigger text */
+    .win95-titlebar { font-size: 15px !important; padding: 10px 12px !important; }
+    .win95-titlebar span { font-size: 15px !important; }
     .win95-titlebar .win-buttons { display: none !important; }
-    .retro-marquee { padding: 4px 0; margin-bottom: 8px; }
-    .retro-marquee-inner { font-size: 14px; }
+
+    /* Marquee */
+    .retro-marquee { padding: 6px 0; margin-bottom: 10px; }
+    .retro-marquee-inner { font-size: 16px; }
+
+    /* Stack columns vertically */
     [data-testid="stHorizontalBlock"] { flex-direction: column !important; }
     [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
         width: 100% !important; flex: 1 1 100% !important; min-width: 0 !important;
     }
-    .stTextArea textarea { font-size: 13px !important; min-height: 150px !important; }
-    .stButton > button { font-size: 14px !important; padding: 12px 16px !important; min-height: 44px; }
-    .ba-compare { flex-direction: column !important; align-items: center !important; gap: 8px !important; }
-    .ba-card { min-width: unset !important; max-width: 200px !important; }
-    .ba-arrow { font-size: 24px !important; transform: rotate(90deg); }
-    .win95-panel-content { padding: 8px !important; }
-    .status-bar { flex-wrap: wrap !important; gap: 4px !important; justify-content: center !important; padding: 6px 8px !important; }
-    .status-bar .status-section { font-size: 10px !important; padding: 2px 6px !important; }
-    .copy-btn-wrap { text-align: center; }
-    .copy-btn-wrap button { width: 100%; padding: 10px 16px !important; min-height: 44px; }
-    input, select, textarea { font-size: 16px !important; }
-}
 
-/* Extra small (≤480px) */
-@media screen and (max-width: 480px) {
-    .win95-titlebar { font-size: 11px !important; padding: 5px 6px !important; }
-    .retro-marquee-inner { font-size: 12px; }
-    .ba-card { max-width: 160px !important; }
+    /* Bigger text areas */
+    .stTextArea textarea {
+        font-size: 16px !important;
+        min-height: 180px !important;
+    }
+
+    /* Bigger buttons — full width, tall tap targets */
+    .stButton > button,
+    .stButton > button[kind="primary"] {
+        font-size: 16px !important;
+        padding: 14px 20px !important;
+        min-height: 50px;
+        width: 100% !important;
+    }
+
+    /* Before/After */
+    .ba-compare { flex-direction: column !important; align-items: center !important; gap: 8px !important; }
+    .ba-card { min-width: unset !important; max-width: 220px !important; }
+    .ba-arrow { font-size: 28px !important; transform: rotate(90deg); }
+
+    /* Panels — bigger padding, bigger text */
+    .win95-panel-content { padding: 12px !important; font-size: 15px !important; }
+
+    /* Footer status bar */
+    .status-bar {
+        flex-wrap: wrap !important; gap: 6px !important;
+        justify-content: center !important; padding: 8px 10px !important;
+    }
+    .status-bar .status-section { font-size: 12px !important; padding: 4px 8px !important; }
+
+    /* Copy button full width */
+    .copy-btn-wrap { text-align: center; }
+    .copy-btn-wrap button { width: 100%; padding: 12px 16px !important; min-height: 48px; font-size: 15px !important; }
+
+    /* Prevent iOS zoom */
+    input, select, textarea { font-size: 16px !important; }
+
+    /* General text scaling */
+    .stMarkdown p, .stMarkdown li { font-size: 15px !important; }
+
+    /* Sidebar — more opaque on mobile */
     [data-testid="stSidebar"] {
         background: rgba(192, 192, 192, 0.95) !important;
-    }
-    [data-testid="stMainBlockContainer"] {
-        background: rgba(192, 192, 192, 0.8) !important;
     }
 }
 
