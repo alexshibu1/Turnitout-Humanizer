@@ -44,38 +44,10 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-/* ---- STREAMLIT CHROME CLEANUP ---- */
+/* ---- STREAMLIT CHROME — only hide deploy button and menu ---- */
 [data-testid="stToolbar"] { display: none !important; }
 #MainMenu { display: none !important; }
 [data-testid="stDecoration"] { display: none !important; }
-/* Streamlit header — transparent, just holds the sidebar toggle */
-[data-testid="stHeader"] {
-    background: transparent !important;
-}
-/* Sidebar collapse/expand toggle — big, visible, Win95 styled */
-[data-testid="collapsedControl"],
-[data-testid="stSidebarCollapsedControl"],
-[data-testid="stSidebarNavCollapseButton"] {
-    background: #000080 !important;
-    border: 2px solid !important;
-    border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
-    box-shadow: 2px 2px 0 #000 !important;
-}
-[data-testid="collapsedControl"] button,
-[data-testid="stSidebarCollapsedControl"] button,
-[data-testid="collapsedControl"] svg,
-[data-testid="stSidebarCollapsedControl"] svg {
-    color: #fff !important;
-    fill: #fff !important;
-}
-/* On desktop — hide the header bar completely since sidebar stays open */
-@media screen and (min-width: 769px) {
-    [data-testid="stHeader"] {
-        height: 0 !important;
-        min-height: 0 !important;
-        overflow: visible !important;
-    }
-}
 
 /* ---- GLOBAL RESET ---- */
 *, *::before, *::after {
