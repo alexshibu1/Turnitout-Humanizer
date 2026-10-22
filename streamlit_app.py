@@ -44,54 +44,37 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-/* ---- HIDE STREAMLIT DEFAULT HEADER (desktop only) ---- */
-@media screen and (min-width: 769px) {
-    [data-testid="stHeader"] { display: none !important; }
-    header[data-testid="stHeader"] { display: none !important; }
-    .stApp > header { display: none !important; }
-}
-/* Always hide toolbar and main menu */
+/* ---- STREAMLIT CHROME CLEANUP ---- */
 [data-testid="stToolbar"] { display: none !important; }
 #MainMenu { display: none !important; }
-
-/* On mobile — keep sidebar toggle always visible */
-@media screen and (max-width: 768px) {
-    [data-testid="stHeader"] {
-        background: transparent !important;
-        backdrop-filter: none !important;
-        pointer-events: none !important;
-    }
-    [data-testid="stHeader"] * {
-        pointer-events: auto !important;
-    }
+[data-testid="stDecoration"] { display: none !important; }
+/* Streamlit header — transparent, just holds the sidebar toggle */
+[data-testid="stHeader"] {
+    background: transparent !important;
 }
-/* Sidebar toggle — always visible, never hidden */
+/* Sidebar collapse/expand toggle — big, visible, Win95 styled */
 [data-testid="collapsedControl"],
-[data-testid="stSidebarCollapsedControl"] {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: fixed !important;
-    top: 8px !important;
-    left: 8px !important;
-    z-index: 99999 !important;
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="stSidebarNavCollapseButton"] {
     background: #000080 !important;
     border: 2px solid !important;
     border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
     box-shadow: 2px 2px 0 #000 !important;
-    padding: 6px 10px !important;
-    cursor: pointer !important;
 }
+[data-testid="collapsedControl"] button,
+[data-testid="stSidebarCollapsedControl"] button,
 [data-testid="collapsedControl"] svg,
 [data-testid="stSidebarCollapsedControl"] svg {
     color: #fff !important;
     fill: #fff !important;
-    stroke: #fff !important;
 }
-/* Hide it when sidebar is already open */
-[data-testid="stSidebar"][aria-expanded="true"] ~ [data-testid="collapsedControl"],
-[data-testid="stSidebar"][aria-expanded="true"] ~ [data-testid="stSidebarCollapsedControl"] {
-    display: none !important;
+/* On desktop — hide the header bar completely since sidebar stays open */
+@media screen and (min-width: 769px) {
+    [data-testid="stHeader"] {
+        height: 0 !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+    }
 }
 
 /* ---- GLOBAL RESET ---- */
@@ -771,30 +754,6 @@ input, select, textarea {
     padding-top: 30px;
 }
 
-/* Menu toggle button in header */
-.menu-toggle-btn {
-    display: none;
-    background: #c0c0c0;
-    border: 2px solid;
-    border-color: #dfdfdf #404040 #404040 #dfdfdf;
-    color: #000;
-    font-size: 18px;
-    width: 36px;
-    height: 30px;
-    cursor: pointer;
-    font-weight: 900;
-    line-height: 1;
-    padding: 0;
-    text-align: center;
-    flex-shrink: 0;
-}
-.menu-toggle-btn:active {
-    border-color: #404040 #dfdfdf #dfdfdf #404040;
-}
-@media screen and (max-width: 768px) {
-    .menu-toggle-btn { display: inline-block !important; }
-}
-
 /* ============================================================
    MOBILE RESPONSIVE
    ============================================================ */
@@ -1236,17 +1195,7 @@ with st.sidebar:
 # ============================================================
 st.markdown("""
 <div class="win95-titlebar" style="font-size:20px;padding:12px 16px;margin-bottom:0;position:relative;z-index:999;">
-    <div style="display:flex;align-items:center;gap:10px;">
-        <button class="menu-toggle-btn" onclick="
-            var sb = window.parent.document.querySelector('[data-testid=stSidebar]');
-            if (!sb) sb = document.querySelector('[data-testid=stSidebar]');
-            if (sb) { sb.setAttribute('aria-expanded','true'); sb.style.display='block'; sb.style.width='300px'; sb.style.transform='none'; }
-            var ctrl = window.parent.document.querySelector('[data-testid=collapsedControl] button, [data-testid=stSidebarCollapsedControl] button');
-            if (!ctrl) ctrl = document.querySelector('[data-testid=collapsedControl] button, [data-testid=stSidebarCollapsedControl] button');
-            if (ctrl) ctrl.click();
-        " title="Open Menu">☰</button>
-        <span style="letter-spacing:1.5px;">🖥️ TURNITOUT — AI TEXT HUMANIZER</span>
-    </div>
+    <span style="letter-spacing:1.5px;">🖥️ TURNITOUT — AI TEXT HUMANIZER</span>
     <div class="win-buttons">
         <span class="win-btn">_</span>
         <span class="win-btn">□</span>
