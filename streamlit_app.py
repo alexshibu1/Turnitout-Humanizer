@@ -44,30 +44,46 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-/* ---- STREAMLIT CHROME — only hide deploy button and menu ---- */
-[data-testid="stToolbar"] { display: none !important; }
+/* ---- STREAMLIT CHROME — hide menu & decoration, keep toolbar for sidebar toggle ---- */
 #MainMenu { display: none !important; }
 [data-testid="stDecoration"] { display: none !important; }
+[data-testid="stStatusWidget"] { display: none !important; }
 
-/* Sidebar open/close toggle — always visible */
-[data-testid="collapsedControl"] {
-    z-index: 999999 !important;
-    position: fixed !important;
-    top: 6px !important;
-    left: 6px !important;
+/* Header bar — make transparent so Bliss shows, slim it down */
+[data-testid="stHeader"] {
+    background: transparent !important;
+    height: auto !important;
 }
-[data-testid="collapsedControl"] button {
+[data-testid="stToolbar"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Sidebar expand button (Streamlit 1.66+: stExpandSidebarButton) — always visible */
+[data-testid="stExpandSidebarButton"] {
     background: #000080 !important;
     color: #fff !important;
-    border: 2px solid #dfdfdf !important;
-    padding: 8px 12px !important;
+    border: 2px solid !important;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
+    padding: 6px 10px !important;
     min-width: 40px !important;
     min-height: 40px !important;
 }
-[data-testid="collapsedControl"] svg {
+[data-testid="stExpandSidebarButton"] svg {
     color: #fff !important;
     width: 20px !important;
     height: 20px !important;
+}
+
+/* Sidebar collapse button inside sidebar */
+[data-testid="stSidebarCollapseButton"] button {
+    background: #c0c0c0 !important;
+    border: 2px solid !important;
+    border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
+}
+[data-testid="stSidebarCollapseButton"] svg {
+    color: #000 !important;
 }
 
 /* ---- GLOBAL RESET ---- */
@@ -119,18 +135,12 @@ input, select, textarea {
     -webkit-backdrop-filter: blur(8px);
     border-right: 2px solid;
     border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
-    display: flex !important;
-    min-width: 280px !important;
     z-index: 1000 !important;
 }
 [data-testid="stSidebar"] > div,
 [data-testid="stSidebar"] > div > div,
 [data-testid="stSidebarContent"] {
     background: transparent !important;
-}
-[data-testid="stSidebar"][aria-expanded="false"] {
-    display: none !important;
-    min-width: 0 !important;
 }
 [data-testid="stSidebar"] .stMarkdown h2,
 [data-testid="stSidebar"] .stMarkdown h3,
@@ -951,6 +961,82 @@ input, select, textarea {
 """, unsafe_allow_html=True)
 
 st.markdown(f"<style>{_bliss_css}</style>", unsafe_allow_html=True)
+
+# Bulletproof sidebar toggle: appended to document.body so it escapes all
+# Streamlit stacking contexts. Also clears stuck collapsed state from localStorage.
+st.markdown("""
+<script>
+(function(){
+    // Clear stuck sidebar collapsed state so it starts expanded
+    try { localStorage.removeItem('stSidebarCollapsed'); } catch(e){}
+
+    // Remove any previous instance (Streamlit reruns re-inject scripts)
+    var old = document.getElementById('sb-toggle');
+    if(old) old.remove();
+
+    var b = document.createElement('button');
+    b.id = 'sb-toggle';
+    b.innerHTML = '&#9776; MENU';
+    b.setAttribute('aria-label','Open sidebar');
+    b.style.cssText = [
+        'position:fixed','top:8px','left:8px','z-index:2147483647',
+        'background:#000080','color:#fff',
+        'border:2px solid','border-color:#dfdfdf #404040 #404040 #dfdfdf',
+        'height:40px','font-size:14px','font-weight:bold','font-family:Segoe UI,Tahoma,sans-serif',
+        'line-height:36px','cursor:pointer','box-shadow:2px 2px 0 #000',
+        'padding:0 12px','display:none','-webkit-tap-highlight-color:transparent',
+        'text-align:center','white-space:nowrap','letter-spacing:0.5px'
+    ].join(';');
+    document.body.appendChild(b);
+
+    b.addEventListener('click', function(e){
+        e.stopPropagation();
+        // Try all known Streamlit sidebar toggle selectors
+        var selectors = [
+            '[data-testid="stExpandSidebarButton"]',
+            '[data-testid="collapsedControl"] button',
+            '[data-testid="stSidebarNavToggle"]'
+        ];
+        for(var i=0;i<selectors.length;i++){
+            var c = document.querySelector(selectors[i]);
+            if(c){ c.click(); return; }
+        }
+        // Fallback: directly toggle sidebar attributes
+        var s = document.querySelector('[data-testid="stSidebar"]');
+        if(!s) return;
+        s.setAttribute('data-collapsed','false');
+        s.setAttribute('aria-expanded','true');
+        s.style.transform = 'translateX(0)';
+        s.style.display = 'flex';
+    });
+
+    function update(){
+        var s = document.querySelector('[data-testid="stSidebar"]');
+        if(!s){ b.style.display='block'; return; }
+        var collapsed = s.getAttribute('data-collapsed')==='true'
+            || s.getAttribute('aria-expanded')==='false'
+            || getComputedStyle(s).transform !== 'none';
+        b.style.display = collapsed ? 'block' : 'none';
+    }
+    update();
+    var s = document.querySelector('[data-testid="stSidebar"]');
+    if(s) new MutationObserver(update).observe(s,{attributes:true,attributeFilter:['data-collapsed','aria-expanded','style']});
+    window.addEventListener('resize', update);
+    setInterval(update, 800);
+})();
+</script>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<script>
+// Clear stuck sidebar-collapsed state from localStorage (Streamlit 1.66+)
+Object.keys(localStorage).forEach(function(key) {
+    if (key.indexOf('stSidebarCollapsed') === 0) {
+        localStorage.removeItem(key);
+    }
+});
+</script>
+""", unsafe_allow_html=True)
 
 
 # ============================================================
