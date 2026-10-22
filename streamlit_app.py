@@ -44,69 +44,24 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-/* ---- STREAMLIT CHROME — hide menu & decoration, keep toolbar for sidebar toggle ---- */
-#MainMenu { display: none !important; }
-[data-testid="stDecoration"] { display: none !important; }
-[data-testid="stStatusWidget"] { display: none !important; }
-
-/* Header bar — make transparent so Bliss shows, slim it down */
+/* ---- STREAMLIT CHROME — transparent, not hidden (sidebar toggle lives here) ---- */
 [data-testid="stHeader"] {
-    background: transparent !important;
-    height: auto !important;
-}
-[data-testid="stToolbar"] {
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
 }
-
-/* Sidebar expand button (Streamlit 1.66+: stExpandSidebarButton) — always visible */
-[data-testid="stExpandSidebarButton"] {
-    background: #000080 !important;
-    color: #fff !important;
-    border: 2px solid !important;
-    border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
-    padding: 6px 10px !important;
-    min-width: 40px !important;
-    min-height: 40px !important;
+[data-testid="stToolbar"] {
+    background: transparent !important;
+    border: none !important;
 }
-[data-testid="stExpandSidebarButton"] svg {
-    color: #fff !important;
-    width: 20px !important;
-    height: 20px !important;
-}
-
-/* Sidebar collapse button inside sidebar */
-[data-testid="stSidebarCollapseButton"] button {
-    background: #c0c0c0 !important;
-    border: 2px solid !important;
-    border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
-}
-[data-testid="stSidebarCollapseButton"] svg {
-    color: #000 !important;
-}
+#MainMenu { display: none !important; }
+[data-testid="stDecoration"] { display: none !important; }
+[data-testid="stStatusWidget"] { display: none !important; }
 
 /* ---- GLOBAL RESET ---- */
 *, *::before, *::after {
     border-radius: 0 !important;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Prevent iOS zoom on input focus */
-input, select, textarea {
-    font-size: 16px !important;
-}
-
-/* iOS safe area support */
-.stApp {
-    padding-top: env(safe-area-inset-top) !important;
-    padding-bottom: env(safe-area-inset-bottom) !important;
-}
-
-/* Smooth scrolling on iOS */
-[data-testid="stMainBlockContainer"],
-[data-testid="stSidebar"] > div {
-    -webkit-overflow-scrolling: touch;
 }
 
 /* Main content block — frosted glass so Bliss shows through */
@@ -130,17 +85,11 @@ input, select, textarea {
 
 /* ---- SIDEBAR ---- */
 [data-testid="stSidebar"] {
-    background: rgba(192, 192, 192, 0.85) !important;
+    background: rgba(192, 192, 192, 0.75) !important;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-right: 2px solid;
     border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
-    z-index: 1000 !important;
-}
-[data-testid="stSidebar"] > div,
-[data-testid="stSidebar"] > div > div,
-[data-testid="stSidebarContent"] {
-    background: transparent !important;
 }
 [data-testid="stSidebar"] .stMarkdown h2,
 [data-testid="stSidebar"] .stMarkdown h3,
@@ -769,11 +718,8 @@ input, select, textarea {
     padding-top: 30px;
 }
 
-/* ============================================================
-   MOBILE RESPONSIVE
-   ============================================================ */
+/* ---- MOBILE RESPONSIVE (≤768px) ---- */
 @media screen and (max-width: 768px) {
-    /* Main container — full-width, no border clipping */
     [data-testid="stMainBlockContainer"] {
         padding: 8px !important;
         margin: 0 !important;
@@ -781,172 +727,38 @@ input, select, textarea {
         box-shadow: none !important;
         background: rgba(192, 192, 192, 0.7) !important;
     }
-    .block-container {
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-    }
-
-    /* Header — smaller text, tighter padding */
-    .win95-titlebar {
-        font-size: 12px !important;
-        padding: 6px 8px !important;
-        letter-spacing: 0.5px !important;
-    }
-    .win95-titlebar span {
-        letter-spacing: 0.5px !important;
-        font-size: 12px !important;
-    }
-    .win95-titlebar .win-buttons {
-        display: none !important;
-    }
-
-    /* Marquee — smaller */
+    .block-container { padding-left: 8px !important; padding-right: 8px !important; }
+    .win95-titlebar { font-size: 12px !important; padding: 6px 8px !important; }
+    .win95-titlebar .win-buttons { display: none !important; }
     .retro-marquee { padding: 4px 0; margin-bottom: 8px; }
     .retro-marquee-inner { font-size: 14px; }
-
-    /* Columns — stack vertically */
-    [data-testid="stHorizontalBlock"] {
-        flex-direction: column !important;
-    }
+    [data-testid="stHorizontalBlock"] { flex-direction: column !important; }
     [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] {
-        width: 100% !important;
-        flex: 1 1 100% !important;
-        min-width: 0 !important;
+        width: 100% !important; flex: 1 1 100% !important; min-width: 0 !important;
     }
-
-    /* Text areas — shorter on mobile */
-    .stTextArea textarea {
-        font-size: 13px !important;
-        min-height: 150px !important;
-    }
-
-    /* Buttons — full width, bigger tap target */
-    .stButton > button,
-    .stButton > button[kind="primary"] {
-        font-size: 14px !important;
-        padding: 12px 16px !important;
-        min-height: 44px;
-    }
-
-    /* Before/After comparison — stack vertically */
-    .ba-compare {
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 8px !important;
-    }
-    .ba-card {
-        min-width: unset !important;
-        max-width: 200px !important;
-    }
-    .ba-arrow {
-        font-size: 24px !important;
-        padding-top: 0 !important;
-        transform: rotate(90deg);
-    }
-
-    /* Hit counter — wrap and shrink */
-    .hit-counter {
-        flex-wrap: wrap !important;
-        gap: 8px !important;
-        padding: 8px 12px !important;
-        justify-content: center;
-    }
-    .hit-counter .value {
-        font-size: 14px !important;
-        min-width: 40px !important;
-        padding: 2px 6px !important;
-    }
-    .hit-counter .label {
-        font-size: 9px !important;
-    }
-
-    /* Score pills — smaller */
-    .score-pills { gap: 6px; }
-    .score-pill { padding: 4px 10px; font-size: 12px; }
-
-    /* Copy button — full width */
+    .stTextArea textarea { font-size: 13px !important; min-height: 150px !important; }
+    .stButton > button { font-size: 14px !important; padding: 12px 16px !important; min-height: 44px; }
+    .ba-compare { flex-direction: column !important; align-items: center !important; gap: 8px !important; }
+    .ba-card { min-width: unset !important; max-width: 200px !important; }
+    .ba-arrow { font-size: 24px !important; transform: rotate(90deg); }
+    .win95-panel-content { padding: 8px !important; }
+    .status-bar { flex-wrap: wrap !important; gap: 4px !important; justify-content: center !important; padding: 6px 8px !important; }
+    .status-bar .status-section { font-size: 10px !important; padding: 2px 6px !important; }
     .copy-btn-wrap { text-align: center; }
-    .copy-btn-wrap button {
-        width: 100%;
-        padding: 10px 16px !important;
-        font-size: 14px !important;
-        min-height: 44px;
-    }
-
-    /* Status bar footer — stack */
-    .status-bar {
-        flex-wrap: wrap !important;
-        gap: 4px !important;
-        justify-content: center !important;
-        padding: 6px 8px !important;
-    }
-    .status-bar .status-section {
-        font-size: 10px !important;
-        padding: 2px 6px !important;
-    }
-
-    /* Panels — less padding */
-    .win95-panel-content {
-        padding: 8px !important;
-    }
-
-    /* Sentence rows — tighter */
-    .sent-row { padding: 4px 6px; font-size: 12px; }
-    .sent-badge { min-width: 32px; font-size: 10px; padding: 2px 4px; }
-
-    /* Feature boxes in sidebar */
-    .sidebar-feature-box { font-size: 12px; padding: 8px 10px; }
-    .sidebar-feature-box li { font-size: 11px; }
-
-    /* Sidebar taskbar */
-    .sidebar-taskbar { font-size: 10px; padding: 2px 4px; }
-    .taskbar-start { font-size: 10px; padding: 2px 6px 2px 3px; }
-
-    /* Retro clock — smaller */
-    .retro-clock { font-size: 18px; padding: 4px 10px; letter-spacing: 2px; }
-
-    /* Table overflows */
-    .xerox-table, table { font-size: 12px; }
-    .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .copy-btn-wrap button { width: 100%; padding: 10px 16px !important; min-height: 44px; }
+    input, select, textarea { font-size: 16px !important; }
 }
 
-/* Extra small screens (phones in portrait — iPhone Pro etc) */
+/* Extra small (≤480px) */
 @media screen and (max-width: 480px) {
-    .win95-titlebar {
-        font-size: 11px !important;
-        padding: 5px 6px !important;
-    }
-    .win95-titlebar span {
-        font-size: 11px !important;
-    }
+    .win95-titlebar { font-size: 11px !important; padding: 5px 6px !important; }
     .retro-marquee-inner { font-size: 12px; }
     .ba-card { max-width: 160px !important; }
-    .retro-clock { font-size: 16px; }
-    .mini-hit-counter { font-size: 10px; padding: 4px 8px; }
-    .mini-hit-counter .counter-digits { font-size: 14px; }
-    .hit-counter {
-        font-size: 12px !important;
-        padding: 6px 8px !important;
-    }
-    /* Sidebar collapses on mobile — make overlay solid */
     [data-testid="stSidebar"] {
         background: rgba(192, 192, 192, 0.95) !important;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
     }
-    /* Full bleed main content */
     [data-testid="stMainBlockContainer"] {
         background: rgba(192, 192, 192, 0.8) !important;
-    }
-    /* Donut SVGs — prevent overflow */
-    .win95-panel-content svg {
-        max-width: 100% !important;
-        height: auto !important;
-    }
-    /* Highlighted text — word break */
-    .highlighted-text {
-        word-break: break-word;
-        overflow-wrap: break-word;
     }
 }
 
@@ -962,81 +774,13 @@ input, select, textarea {
 
 st.markdown(f"<style>{_bliss_css}</style>", unsafe_allow_html=True)
 
-# Bulletproof sidebar toggle: appended to document.body so it escapes all
-# Streamlit stacking contexts. Also clears stuck collapsed state from localStorage.
-st.markdown("""
+# Clear stuck sidebar collapsed state (st.components.v1.html runs JS reliably)
+import streamlit.components.v1 as components
+components.html("""
 <script>
-(function(){
-    // Clear stuck sidebar collapsed state so it starts expanded
-    try { localStorage.removeItem('stSidebarCollapsed'); } catch(e){}
-
-    // Remove any previous instance (Streamlit reruns re-inject scripts)
-    var old = document.getElementById('sb-toggle');
-    if(old) old.remove();
-
-    var b = document.createElement('button');
-    b.id = 'sb-toggle';
-    b.innerHTML = '&#9776; MENU';
-    b.setAttribute('aria-label','Open sidebar');
-    b.style.cssText = [
-        'position:fixed','top:8px','left:8px','z-index:2147483647',
-        'background:#000080','color:#fff',
-        'border:2px solid','border-color:#dfdfdf #404040 #404040 #dfdfdf',
-        'height:40px','font-size:14px','font-weight:bold','font-family:Segoe UI,Tahoma,sans-serif',
-        'line-height:36px','cursor:pointer','box-shadow:2px 2px 0 #000',
-        'padding:0 12px','display:none','-webkit-tap-highlight-color:transparent',
-        'text-align:center','white-space:nowrap','letter-spacing:0.5px'
-    ].join(';');
-    document.body.appendChild(b);
-
-    b.addEventListener('click', function(e){
-        e.stopPropagation();
-        // Try all known Streamlit sidebar toggle selectors
-        var selectors = [
-            '[data-testid="stExpandSidebarButton"]',
-            '[data-testid="collapsedControl"] button',
-            '[data-testid="stSidebarNavToggle"]'
-        ];
-        for(var i=0;i<selectors.length;i++){
-            var c = document.querySelector(selectors[i]);
-            if(c){ c.click(); return; }
-        }
-        // Fallback: directly toggle sidebar attributes
-        var s = document.querySelector('[data-testid="stSidebar"]');
-        if(!s) return;
-        s.setAttribute('data-collapsed','false');
-        s.setAttribute('aria-expanded','true');
-        s.style.transform = 'translateX(0)';
-        s.style.display = 'flex';
-    });
-
-    function update(){
-        var s = document.querySelector('[data-testid="stSidebar"]');
-        if(!s){ b.style.display='block'; return; }
-        var collapsed = s.getAttribute('data-collapsed')==='true'
-            || s.getAttribute('aria-expanded')==='false'
-            || getComputedStyle(s).transform !== 'none';
-        b.style.display = collapsed ? 'block' : 'none';
-    }
-    update();
-    var s = document.querySelector('[data-testid="stSidebar"]');
-    if(s) new MutationObserver(update).observe(s,{attributes:true,attributeFilter:['data-collapsed','aria-expanded','style']});
-    window.addEventListener('resize', update);
-    setInterval(update, 800);
-})();
+try { window.parent.localStorage.removeItem('stSidebarCollapsed'); } catch(e){}
 </script>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-<script>
-// Clear stuck sidebar-collapsed state from localStorage (Streamlit 1.66+)
-Object.keys(localStorage).forEach(function(key) {
-    if (key.indexOf('stSidebarCollapsed') === 0) {
-        localStorage.removeItem(key);
-    }
-});
-</script>
-""", unsafe_allow_html=True)
+""", height=0)
 
 
 # ============================================================
