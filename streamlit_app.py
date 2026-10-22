@@ -44,21 +44,31 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-/* ---- HIDE STREAMLIT DEFAULT HEADER ---- */
-[data-testid="stHeader"] {
-    display: none !important;
+/* ---- HIDE STREAMLIT DEFAULT HEADER (desktop only) ---- */
+@media screen and (min-width: 769px) {
+    [data-testid="stHeader"] { display: none !important; }
+    header[data-testid="stHeader"] { display: none !important; }
+    .stApp > header { display: none !important; }
 }
-[data-testid="stToolbar"] {
-    display: none !important;
-}
-header[data-testid="stHeader"] {
-    display: none !important;
-}
-.stApp > header {
-    display: none !important;
-}
-#MainMenu {
-    display: none !important;
+/* Always hide toolbar and main menu */
+[data-testid="stToolbar"] { display: none !important; }
+#MainMenu { display: none !important; }
+
+/* On mobile — make header transparent so it's just the sidebar toggle */
+@media screen and (max-width: 768px) {
+    [data-testid="stHeader"] {
+        background: transparent !important;
+        backdrop-filter: none !important;
+    }
+    /* Make sidebar toggle button visible and styled */
+    [data-testid="stHeader"] button[kind="header"],
+    [data-testid="collapsedControl"] {
+        background: #000080 !important;
+        color: #fff !important;
+        border: 2px solid !important;
+        border-color: #dfdfdf #404040 #404040 #dfdfdf !important;
+        z-index: 9999 !important;
+    }
 }
 
 /* ---- GLOBAL RESET ---- */
